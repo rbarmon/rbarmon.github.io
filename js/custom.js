@@ -2,10 +2,18 @@
 
   "use strict";
 
+  $('body').addClass('dark-mode');
+    $('.work_container .content').addClass('dark-mode');
+    $('.work_container .date').addClass('dark-mode');
+
     // COLOR MODE
     $('.color-mode').click(function(){
         $('.color-mode-icon').toggleClass('active')
-        $('body').toggleClass('dark-mode')        
+        $('body').toggleClass('dark-mode')   
+        
+        // Toggle dark mode for work container content
+        $('.work_container .content').toggleClass('dark-mode');
+        $('.work_container .date').toggleClass('dark-mode');
     })
 
     
