@@ -193,3 +193,20 @@ body.dark-mode {
         color: #e0e0e0;
     }
 }
+
+
+/* Mobile Responsive (less than 768px) */
+@media (max-width: 768px) {
+    .timeline {
+        flex-direction: column;
+    }
+    
+    .work_container {
+        width: 100%; /* Full width on smaller screens */
+        text-align: left; /* Align everything to the left on mobile */
+    }
+    
+    .work_container.right {
+        text-align: left; /* Override right alignment for mobile view */
+    }
+}

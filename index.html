@@ -59,19 +59,22 @@ https://www.tooplate.com/view/2115-marvel
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a href="#about" class="nav-link"><span data-hover="About">About</span></a>
+                        <a href="#about" class="nav-link"><span data-hover="About" data-en="About"  data-ja="紹介">About</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#technical" class="nav-link"><span data-hover="Technical Projects">Technical Projects</span></a>
+                        <a href="#work" class="nav-link"><span data-hover="Work Exp." data-en="Work Exp."  data-ja="職歴">Work Exp.</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#web" class="nav-link"><span data-hover="Web Projects">Web Projects</span></a>
+                        <a href="#technical" class="nav-link"><span data-hover="Technical"  data-en="Technical"  data-ja="技術">Technical</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#prototype" class="nav-link"><span data-hover="Prototype Design">Prototype Design</span></a>
+                        <a href="#web" class="nav-link"><span data-hover="Software" data-en="Software"  data-ja="ソフトウェア">Software</span></a>
                     </li>
                     <li class="nav-item">
-                        <a href="#datascience" class="nav-link"><span data-hover="Data Science/Analytics">Data Science/Analytics</span></a>
+                        <a href="#prototype" class="nav-link"><span data-hover="Prototype" data-en="Prototype"  data-ja="プロトタイプ">Prototype</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#datascience" class="nav-link"><span data-hover="Data" data-en="Data"  data-ja="データ">Data</span></a>
                     </li>
                 </ul>
 
@@ -82,6 +85,14 @@ https://www.tooplate.com/view/2115-marvel
                         Toggle Dark Mode
                       </div>
                     </div>
+                    <div class="ml-lg-4">
+
+                    <!-- Language Toggle Button -->
+                    <li class="nav-item">
+                        <button id="toggle-language" class="btn btn-outline-primary">日本語</button>
+                    </li>
+                    </div>
+
                 </ul>
             </div>
         </div>
@@ -96,15 +107,20 @@ https://www.tooplate.com/view/2115-marvel
                     <div class="col-lg-7 col-md-12 col-12 d-flex align-items-center">
                         <div class="about-text">
                             <h1 class="animated animated-text">
-                                <span class="mr-2">Hi, I'm Rian</span>
+                                <span class="mr-2" data-en="Hi, I'm Rian" data-ja="Hi, I'm Rian">Hi, I'm Rian</span>
                             </h1>
-                            <p class="custom-p">Welcome to my portfolio website!</span></p>
-        
-                            <p class="custom-p"><strong>I am a Bachelor of Computer Science student at Monash University.</strong></p>
-        
-                            <p class="custom-p">I'm passionate about the intersection of <em><strong>Full Stack Web Development</strong></em> and <em><strong>Data Science</strong></em>, and how these fields can come together to create powerful and <strong>impactful projects</strong>.</p>
-        
-                            <p class="custom-p"><strong>Tech Stack:</strong></p>
+                            <p class="custom-p" data-en="Welcome to my portfolio website!" data-ja="私のポートフォリオウェブサイトへようこそ！">
+                                Welcome to my portfolio website!
+                            </p>
+                            <p class="custom-p" data-en="I am a Bachelor of Computer Science student at Monash University."
+                                data-ja="モナシュ大学でコンピュータサイエンスの学士号を取得しています。">
+                                I am a Bachelor of Computer Science student at Monash University.
+                            </p>
+                            <p class="custom-p" data-en="I'm passionate about the intersection of Full Stack Web Development and Data Science..."
+                                data-ja="私はフルスタックウェブ開発とデータサイエンスの交差に情熱を持っています...">
+                                I'm passionate about the intersection of Full Stack Web Development and Data Science...
+                            </p>
+                            <p class="custom-p" data-en="Tech Stack:" data-ja="技術スタック:"><strong>Tech Stack:</strong></p>
                             <div class="tech-icons">
                                 <i class="devicon-javascript-plain colored" title="JavaScript"></i>
                                 <i class="devicon-react-original colored" title="React.js"></i>
@@ -121,13 +137,15 @@ https://www.tooplate.com/view/2115-marvel
                                 <i class="devicon-tableau-plain colored" title="Tableau"></i>
                             </div>
         
-                            <a href="Resume/resume.pdf" class="btn mr-lg-2 custom-btn" download="resume.pdf">
-                                <i class='uil uil-file-alt'></i> Download Resume
-                            </a>
-        
-                            <a class="custom-btn custom-bg-dark btn text-center" href="https://github.com/rbarmon" target='_blank'>GitHub</a>
+                            <div class="button-container">
+                                <a href="Resume/resume.pdf" class="btn mr-lg-2 custom-btn" download="resume.pdf">
+                                    <i class='uil uil-file-alt'></i> Download Resume
+                                </a>
+                                <a class="custom-btn custom-bg-dark btn text-center" href="https://github.com/rbarmon" target='_blank'>GitHub</a>
+                            </div>
         
                         </div>
+        
                     </div>
         
                     <div class="col-lg-5 col-md-12 col-12">
@@ -143,8 +161,8 @@ https://www.tooplate.com/view/2115-marvel
         
 
 
-        <section class="timeline-section py-5" id="experience">
-            <section class="contact py-5" id="technical">
+        <section class="timeline-section py-5" id="work">
+            <section class="contact py-5" id="work">
                 <!-- PROTOTYPE DESIGN PROJECTS -->
                 <div class="col-lg-8 text-center mx-auto">
                 <h2>Work Experience</h2>
@@ -338,11 +356,116 @@ https://www.tooplate.com/view/2115-marvel
         <section class="project py-5" >
             <section class="contact py-5" id="web">
                 <div class="col-lg-8 text-center mx-auto">
-                    <h2>Web Projects</h2>
+                    <h2>Software Development Projects</h2>
                 </div>
             </section>
+
+            <div class="container">
+                <div class="row">
+    
+                    <div class="col-lg-6 col-12">
+                        <h4 class="mb-5">AFL Game Ranking System</h2>
+                    </div>
+    
+                    <div class="col-12">
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-intro" role="tabpanel" aria-labelledby="nav-intro-tab">
+                                <div class="row">
+                                    <div class="col-lg-6 col-12 mb-lg-0 mb-4">
+                                        <img src="images/project/web/aflgrs.png" class="img-fluid" alt="">
+                                    </div>
+    
+                                    <div class="col-lg-5 col-12 m-auto">
+    
+                                        <p class = "custom-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    
+                                        <p class = "custom-p">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    
+                                        <p class = "custom-p">Tech: React, Redux, </p>
+    
+                                        <a class="custom-btn custom-bg-dark btn text-center" href="https://fit3164-39974.web.app/" target='_blank'>View Website</a>
+    
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+
             <!-- React Website -->
             <div class="container">
+                <div class="row">
+    
+                    <div class="col-lg-6 col-12">
+                        <h4 class="mb-5">TechExtend AI</h2>
+                    </div>
+    
+                    <div class="col-12">
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-intro" role="tabpanel" aria-labelledby="nav-intro-tab">
+                                <div class="row">
+                                    <div class="col-lg-6 col-12 mb-lg-0 mb-4">
+                                        <img src="images/project/web/techextendai.png" class="img-fluid" alt="">
+                                    </div>
+    
+                                    <div class="col-lg-5 col-12 m-auto">
+    
+                                        <p class = "custom-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+    
+                                        <p class = "custom-p">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    
+                                        <p class = "custom-p">Tech: React, Redux, </p>
+    
+                                        <a class="custom-btn custom-bg-dark btn text-center" href="https://techextend.ai/" target='_blank'>View Website</a>
+    
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+
+                        <!-- React Website -->
+                        <div class="container">
+                            <div class="row">
+                
+                                <div class="col-lg-6 col-12">
+                                    <h4 class="mb-5">Quizzo.io</h2>
+                                </div>
+                
+                                <div class="col-12">
+                                    <div class="tab-content" id="nav-tabContent">
+                                        <div class="tab-pane fade show active" id="nav-intro" role="tabpanel" aria-labelledby="nav-intro-tab">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-12 mb-lg-0 mb-4">
+                                                    <img src="images/project/web/quizzoio.png" class="img-fluid" alt="">
+                                                </div>
+                
+                                                <div class="col-lg-5 col-12 m-auto">
+                
+                                                    <p class = "custom-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                
+                                                    <p class = "custom-p">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                
+                                                    <p class = "custom-p">Tech: React, Redux, </p>
+                
+                                                    <a class="custom-btn custom-bg-dark btn text-center" href="https://quizzo.io/" target='_blank'>View Website</a>
+                
+                                                  </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                
+                            </div>
+                        </div>
+
+            <!-- React Website -->
+            <!-- <div class="container">
                 <div class="row">
     
                     <div class="col-lg-6 col-12">
@@ -376,7 +499,9 @@ https://www.tooplate.com/view/2115-marvel
     
                 </div>
             </div>
-            <section class="about section-padding" id="section_2">
+            <section class="about section-padding" id="section_2"> -->
+
+                
                     <!-- TypeScript React Website -->
                     <div class="container">
                         <div class="row">
@@ -402,7 +527,7 @@ https://www.tooplate.com/view/2115-marvel
                                                 <p class = "custom-p">Tech: React, NodeJS, MongoDB </p>
     
     
-                                                <a class="custom-btn custom-bg-dark btn text-center" href="https://www.github.com" target='_blank'>View GitHub</a>
+                                                <a class="custom-btn custom-bg-dark btn text-center" href="https://github.com/rbarmon/bestideadecider" target='_blank'>View GitHub</a>
                                                 <!-- <a class="custom-btn custom-bg-dark btn text-center" href="https://www.github.com" target='_blank'>View Website</a> -->
     
                                               </div>
@@ -496,7 +621,42 @@ https://www.tooplate.com/view/2115-marvel
     
                 </div>
             </div>
+            <section class="about section-padding" id="section_2">
+
+            <div class="container">
+                <div class="row">
     
+                    <div class="col-lg-6 col-12">
+                        <h4 class="mb-5">Bonsai Study App Prototype Design</h2>
+                    </div>
+    
+                    <div class="col-12">
+                        <div class="tab-content" id="nav-tabContent">
+                            <div class="tab-pane fade show active" id="nav-intro" role="tabpanel" aria-labelledby="nav-intro-tab">
+                                <div class="row">
+                                    <div class="col-lg-6 col-12 mb-lg-0 mb-4">
+                                        <img src="images/project/prototype/figma2.png" class="img-fluid" alt="Figma iPhone Screen Hiking App">
+                                    </div>
+    
+                                    <div class="col-lg-5 col-12 m-auto">
+    
+                                        <p class = "custom-p">This project focuses on creating a high-fidelity prototype for a hiking app with a strong emphasis on usability and accessibility principles.  </p>
+    
+                                        <p class = "custom-p">The process started with Data Gathering and User Analysis, where around 50 responses were collected through Google Forms to understand the target audience and identify their pain points. Using this information, a mobile application prototype was designed to help users identify and navigate hiking trails.</p>
+                                        <p class = "custom-p">The development involved multiple stages, and the prototype was enhanced with usability improvements, following established design principles such as Shneiderman's 8 Golden Rules. Additionally, accessibility improvements were incorporated, addressing WCAG guideline violations to ensure inclusivity and usability for all users.</p>
+    
+                                        <a class="custom-btn custom-bg-dark btn text-center" href="https://www.figma.com/design/ccAknMzGak4BBs4JLvt1g1/Bonsai-App?node-id=0-1&node-type=canvas&t=1OlK20Pyx624MIYp-0" target='_blank'>View Figma</a>
+    
+                                      </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    
+                </div>
+            </div>
+        </section>
+
     
         <!-- DATA SCIENCE/ANALYTICS PROJECTS -->
         <section class="project py-5" >
@@ -556,18 +716,18 @@ https://www.tooplate.com/view/2115-marvel
                                 <div class="tab-pane fade show active" id="nav-intro" role="tabpanel" aria-labelledby="nav-intro-tab">
                                     <div class="row">
                                         <div class="col-lg-6 col-12 mb-lg-0 mb-4">
-                                            <img src="images/project/Untitled document.png" class="img-fluid" alt="Figma iPhone Screen Hiking App">
+                                            <img src="images/project/data/vegalite.png" class="img-fluid" alt="Figma iPhone Screen Hiking App">
                                         </div>
     
                                         <div class="col-lg-5 col-12 m-auto">
     
-                                            <p class = "custom-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                            <p class = "custom-p">In 2020, a Happiness Ranking survey was conducted across Japan, providing valuable insights into what might contribute to happiness in each of the country's prefectures. This project utilizes Vega-Lite to explore various factors, such as crime rates, welfare support, and weather, to understand how they might relate to the happiness levels across the 47 prefectures.</p>
     
-                                            <p class = "custom-p">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                            <p class = "custom-p">This project uses Vega-Lite to offer a clear and interactive view of the various factors that contribute to happiness rankings in Japan. The insights gathered here indicate that improving factors such as crime rates, income levels, and resilience to extreme weather could potentially boost happiness in certain prefectures.</p>
     
     
-                                            <a class="custom-btn custom-bg-dark btn text-center" href="https://www.github.com" target='_blank'>View GitHub</a>
-                                            <a class="custom-btn custom-bg-dark btn text-center" href="https://www.github.com" target='_blank'>View Website</a>
+                                            <a class="custom-btn custom-bg-dark btn text-center" href="https://github.com/rbarmon/FIT3179_Data_Visualisation_II" target='_blank'>View GitHub</a>
+                                            <a class="custom-btn custom-bg-dark btn text-center" href="https://rbarmon.github.io/FIT3179_Data_Visualisation_II/" target='_blank'>View Website</a>
     
                                           </div>
                                     </div>
@@ -596,9 +756,11 @@ https://www.tooplate.com/view/2115-marvel
     
                                     <div class="col-lg-5 col-12 m-auto">
     
-                                        <p class = "custom-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                        <p class = "custom-p">I expanded my knowledge of statistical methods and their applications in data analysis. I engaged in hypothesis testing, confidence interval estimation, and explored penalized regression models to improve model accuracy. </p>
+                                            
+                                            
+                                        <p class = "custom-p">Working on simulation-based statistical methods and unsupervised learning algorithms like clustering helped me understand how to make data-driven predictions and model complex systems. These hands-on experiences strengthened my ability to build and evaluate robust models.</p>
     
-                                        <p class = "custom-p">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
     
                                         <a class="custom-btn custom-bg-dark btn text-center" href="https://www.github.com" target='_blank'>View GitHub</a>
     
@@ -610,7 +772,6 @@ https://www.tooplate.com/view/2115-marvel
     
                 </div>
             </div>
-            <section class="about section-padding" id="section_2">
                 <!--  -->
                 <div class="container">
                     <div class="row">
@@ -629,9 +790,9 @@ https://www.tooplate.com/view/2115-marvel
     
                                         <div class="col-lg-5 col-12 m-auto">
     
-                                            <p class = "custom-p">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                            <p class = "custom-p">I applied business intelligence concepts to real-world scenarios, learning to design and implement data warehousing solutions.</p>
     
-                                            <p class = "custom-p">Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                                            <p class = "custom-p">I worked with star schemas, temporal data, and multi-fact designs to create efficient, scalable data storage systems. I also gained practical experience in data cleaning and developed a deep understanding of OLAP for data analytics. This course taught me how to transform raw business data into structured insights that support decision-making processes.</p>
     
     
                                             <a class="custom-btn custom-bg-dark btn text-center" href="https://www.github.com" target='_blank'>View GitHub</a>
@@ -645,7 +806,73 @@ https://www.tooplate.com/view/2115-marvel
                     </div>
                 </div>
     
-            </section>
+                <!--  -->
+                <div class="container">
+                    <div class="row">
+    
+                        <div class="col-lg-6 col-12">
+                            <h4 class="mb-5">Data Analytics</h2>
+                        </div>
+    
+                        <div class="col-12">
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-intro" role="tabpanel" aria-labelledby="nav-intro-tab">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-12 mb-lg-0 mb-4">
+                                            <img src="images/project/Untitled document.png" class="img-fluid" alt="Figma iPhone Screen Hiking App">
+                                        </div>
+    
+                                        <div class="col-lg-5 col-12 m-auto">
+    
+                                            <p class = "custom-p">Dived deeper into data visualization, regression modeling, and classification techniques. I worked on case studies that involved handling dirty and clean data, ensuring data quality before analysis.</p>
+                                                
+                                            <p class = "custom-p"> Techniques like decision trees, Naïve Bayes classifiers, and ensemble methods were particularly interesting as I applied them to real-world datasets. Toward the end of the course, I explored advanced topics such as text and network analysis, providing a well-rounded understanding of modern data science methodologies.</p>    
+    
+                                            <a class="custom-btn custom-bg-dark btn text-center" href="https://www.github.com" target='_blank'>View GitHub</a>
+    
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
+    
+
+                <!--  -->
+                <div class="container">
+                    <div class="row">
+    
+                        <div class="col-lg-6 col-12">
+                            <h4 class="mb-5">Data Science Fundamentals</h2>
+                        </div>
+    
+                        <div class="col-12">
+                            <div class="tab-content" id="nav-tabContent">
+                                <div class="tab-pane fade show active" id="nav-intro" role="tabpanel" aria-labelledby="nav-intro-tab">
+                                    <div class="row">
+                                        <div class="col-lg-6 col-12 mb-lg-0 mb-4">
+                                            <img src="images/project/Untitled document.png" class="img-fluid" alt="Figma iPhone Screen Hiking App">
+                                        </div>
+    
+                                        <div class="col-lg-5 col-12 m-auto">
+    
+                                            <p class = "custom-p"> I gained hands-on experience with core data science concepts, focusing on Python and R for data wrangling and visualization. I explored diverse datasets, employing regression analysis, classification, and clustering techniques to uncover meaningful insights.</p>
+    
+                                            <p class = "custom-p">Additionally, I tackled big data processing and discussed challenges in managing large datasets. This foundation allowed me to understand the full lifecycle of data science projects—from sourcing and cleaning data to performing complex analyses.</p>
+    
+    
+                                            <a class="custom-btn custom-bg-dark btn text-center" href="https://www.github.com" target='_blank'>View GitHub</a>
+    
+                                          </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+    
+                    </div>
+                </div>
     
         </section>
 </main>  
@@ -709,5 +936,8 @@ https://www.tooplate.com/view/2115-marvel
     <script src="js/custom.js"></script>
     <!-- Additional JavaScript -->
     <script src="js/additional.js"></script>
+
+
+
   </body>
 </html>
