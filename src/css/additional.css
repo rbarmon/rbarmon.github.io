@@ -1,0 +1,32 @@
+
+  
+  .zoom:hover {
+    transform: scale(1.4); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+  }
+
+  .tech-icons i {
+    font-size: 40px;
+    margin: 10px;
+    transition: transform 0.3s;
+}
+
+.tech-icons i:hover {
+    transform: scale(1.5);
+}
+
+.button-container {
+  margin-top: 20px; /* Adjust this value to control how much space you want between the icons and buttons */
+}
+
+/* CSS */
+@media (max-width: 768px) {
+  section.about {
+      padding-top: 0; /* Remove any padding on top */
+      margin-top: 0;  /* Remove any margin on top */
+  }
+  
+  body {
+      margin: 0;
+      padding: 0;
+  }
+}

@@ -1,0 +1,212 @@
+/* Timeline Styling */
+.timeline {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+  
+.work_container {
+    padding: 10px 20px;
+    position: relative;
+    background-color: inherit;
+    width: 45%;
+}
+
+.work_container.left {
+    left: 0;
+    text-align: right; /* Align the text to the right for left-aligned content */
+}
+
+.work_container.right {
+    left: 50%;
+    text-align: left; /* Align the text to the left for right-aligned content */
+}
+
+.work_container .date {
+    padding: 15px;
+    background-color: #1e272e;
+    color: white;
+    position: absolute;
+    width: 120px;
+    top: 10px;
+    text-align: center;
+    z-index: 2;
+}
+
+.work_container.left .date {
+    left: -150px;
+}
+
+.work_container.right .date {
+    right: -150px;
+}
+
+/* Align content closer to the date for left-aligned containers */
+.work_container.left .content {
+    padding: 15px;
+    background-color: white;
+    position: relative;
+    border-radius: 6px;
+    width: 150%;
+    margin-left: auto;
+    text-align: left;
+}
+
+/* Adjust padding and position for right-aligned content */
+.work_container.right .content {
+    padding: 15px;
+    background-color: white;
+    position: relative;
+    border-radius: 6px;
+    width: 150%;
+    margin-right: 0;
+    text-align: left;
+    left: -200px;
+}
+
+/* Styling for the content section inside the work_container */
+.work_container .content {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    font-size: 16px;
+    color: #333;
+    transition: transform 0.3s ease-in-out;
+}
+
+.work_container .content h2 {
+    font-size: 40px;
+    margin-bottom: 10px;
+    color: #007bff;
+}
+
+.work_container .content p {
+    margin-bottom: 10px;
+}
+
+.work_container .content ul {
+    padding-left: 20px;
+    list-style-type: disc;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.work_container .content li {
+    margin-bottom: 6px;
+    color: #555;
+}
+
+/* Add hover effect for better interaction */
+.work_container .content:hover {
+    transform: translateY(-5px);
+    background-color: #fff;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments for narrower screens */
+@media (max-width: 768px) {
+    .work_container {
+        width: 100%; /* Make work containers full-width */
+        text-align: center;
+    }
+
+    .work_container.left,
+    .work_container.right {
+        left: 0; /* Reset left position */
+    }
+
+    .work_container .date {
+        width: 100px;
+        position: relative;
+        margin: 0 auto;
+        left: 0;
+        right: 0;
+        text-align: center;
+    }
+
+    .work_container.left .content,
+    .work_container.right .content {
+        width: 90%; /* Reduce content width */
+        margin: 0 auto;
+        padding: 20px;
+        left: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .work_container .content h2 {
+        font-size: 24px; /* Adjust title size for smaller screens */
+    }
+
+    .work_container .content {
+        font-size: 14px; /* Reduce font size for better readability */
+        padding: 15px;
+    }
+}
+
+/* Dark mode styling */
+body.dark-mode {
+    background-color: #121212; /* Dark background for the whole page */
+    color: #f0f0f0; /* Light text color for readability */
+}
+
+/* Work container content dark mode */
+.work_container .content.dark-mode {
+    background-color: #333; /* Dark background for content */
+    color: #f5f4f4; /* Light text color */
+    border: 1px solid #444; /* Optional border to separate content */
+}
+
+/* Dark mode for the date element */
+.work_container .date.dark-mode {
+    background-color: #444; /* Dark background for dates */
+    color: #f0f0f0; /* Light text color for dates */
+}
+
+/* In dark mode, hover effect changes */
+.work_container .content.dark-mode:hover {
+    background-color: #222; /* Slightly brighter hover effect */
+    box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2); /* Light shadow */
+}
+
+/* Ensure text colors in p items are also white in dark mode */
+.work_container .content.dark-mode p {
+    color: #f0f0f0; /* Lighter color for list items in dark mode */
+}
+
+/* Ensure text colors in list items are also white in dark mode */
+.work_container .content.dark-mode li {
+    color: #ddd; /* Lighter color for list items in dark mode */
+}
+
+.work_container .content.dark-mode h2 {
+    color: #66b2ff; /* Lighter blue for titles in dark mode */
+}
+
+/* Dark mode responsive adjustments (if needed) */
+@media (max-width: 768px) {
+    .work_container .content.dark-mode {
+        padding: 15px;
+        color: #e0e0e0;
+    }
+}
+
+
+/* Mobile Responsive (less than 768px) */
+@media (max-width: 768px) {
+    .timeline {
+        flex-direction: column;
+    }
+    
+    .work_container {
+        width: 100%; /* Full width on smaller screens */
+        text-align: left; /* Align everything to the left on mobile */
+    }
+    
+    .work_container.right {
+        text-align: left; /* Override right alignment for mobile view */
+    }
+}
