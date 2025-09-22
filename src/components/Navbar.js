@@ -1,81 +1,116 @@
-// src/components/Navbar.js
-import React, { useState } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 
-const Navbar = () => {
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [language, setLanguage] = useState('日本語'); // Default to Japanese
+const navItems = [
+  { href: '#about', en: 'About', ja: '紹介' },
+  { href: '#work', en: 'Work', ja: '職歴' },
+  { href: '#oss-hackathon', en: 'OSS/Hackathon', ja: 'OSS/ハッカソン' },
+  { href: '#web', en: 'Software', ja: 'ソフトウェア' },
+  { href: '#prototype', en: 'Prototype', ja: 'プロトタイプ' },
+  { href: '#technical', en: 'Technical', ja: '技術' },
+  { href: '#datascience', en: 'Data', ja: 'データ' },
+];
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-    // Add additional logic to actually toggle dark mode styling
+const Navbar = ({ language, onToggleLanguage, isDarkMode, onToggleDarkMode, logoSrc, style }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
+
+  const impactWords = ['impact', 'change', 'innovation', 'solutions', 'growth', 'excellence', 'progress'];
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentWordIndex((prev) => (prev + 1) % impactWords.length);
+    }, 3000); // Change word every 3 seconds
+
+    return () => clearInterval(interval);
+  }, [impactWords.length]);
+
+  const languageLabel = language === 'en' ? '日本語' : 'English';
+
+  const handleNavClick = () => {
+    if (isOpen) {
+      setIsOpen(false);
+    }
   };
 
-  const toggleLanguage = () => {
-    setLanguage(language === 'English' ? '日本語' : 'English');
-    // Add additional logic to change language
+  const handleDarkMode = () => {
+    onToggleDarkMode();
+    if (isOpen) {
+      setIsOpen(false);
+    }
   };
+
+  const handleLanguage = () => {
+    onToggleLanguage();
+    if (isOpen) {
+      setIsOpen(false);
+    }
+  };
+
+  const colorModeClasses = useMemo(
+    () => `color-mode tron-toggle d-lg-flex justify-content-center align-items-center${isDarkMode ? ' active' : ''}`,
+    [isDarkMode]
+  );
 
   return (
-    <nav className="navbar navbar-expand-sm navbar-light">
-      <div className="container">
-        <a className="navbar-brand" href="/">
-        <img id="topLogo" src="/images/logo/white_favicon_nonbg.png" alt="Top Logo" />
+    <nav className="glass-navbar" style={style}>
+      <div className="nav-container">
+        <a className="nav-brand" href="#about">
+          <div className="functional-logo">
+            <span className="function-def">const</span>
+            <span className="function-name">&nbsp;rian</span>
+            <span className="function-params">&nbsp;=&nbsp;(x)&nbsp;</span>
+            <span className="arrow">=>&nbsp;</span>
+            <span className="function-output">
+              <span className="rotating-word" key={currentWordIndex}>
+                {impactWords[currentWordIndex]}
+              </span>
+            </span>
+            <span className="function-type">;</span>
+          </div>
         </a>
 
         <button
-          className="navbar-toggler"
+          className={`nav-toggle ${isOpen ? 'active' : ''}`}
           type="button"
-          data-toggle="collapse"
-          data-target="#navbarNav"
           aria-controls="navbarNav"
-          aria-expanded="false"
+          aria-expanded={isOpen}
           aria-label="Toggle navigation"
+          onClick={() => setIsOpen((prev) => !prev)}
         >
-          <span className="navbar-toggler-icon"></span>
-          <span className="navbar-toggler-icon"></span>
-          <span className="navbar-toggler-icon"></span>
+          <span></span>
+          <span></span>
+          <span></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarNav">
-          <ul className="navbar-nav mx-auto">
-            <li className="nav-item">
-              <a href="#about" className="nav-link">About</a>
-            </li>
-            <li className="nav-item">
-              <a href="#work" className="nav-link">Work Exp.</a>
-            </li>
-            <li className="nav-item">
-              <a href="#oss-hackathon" className="nav-link">OSS/Hackathon</a>
-            </li>
-            <li className="nav-item">
-              <a href="#web" className="nav-link">Software</a>
-            </li>
-            <li className="nav-item">
-              <a href="#prototype" className="nav-link">Prototype</a>
-            </li>
-            <li className="nav-item">
-              <a href="#technical" className="nav-link">Technical</a>
-            </li>
-            <li className="nav-item">
-              <a href="#datascience" className="nav-link">Data</a>
-            </li>
-          </ul>
+        <div className={`nav-menu ${isOpen ? 'active' : ''}`}>
+          {navItems.map((item) => (
+            <a
+              key={item.href}
+              href={item.href}
+              className="nav-link"
+              onClick={handleNavClick}
+            >
+              {language === 'ja' ? item.ja : item.en}
+            </a>
+          ))}
 
-          <ul className="navbar-nav ml-lg-auto">
-            <div className="ml-lg-4">
-              <div className="color-mode d-lg-flex justify-content-center align-items-center" id="logoSwitch" onClick={toggleDarkMode}>
-                <i className="color-mode-icon"></i>
-                Toggle Dark Mode
-              </div>
-            </div>
-            <div className="ml-lg-4">
-              <li className="nav-item">
-                <button className="btn btn-outline-primary" onClick={toggleLanguage}>
-                  {language}
-                </button>
-              </li>
-            </div>
-          </ul>
+          <div className="nav-actions">
+            <button
+              type="button"
+              className="nav-action-btn"
+              onClick={handleDarkMode}
+              title="Toggle Dark Mode"
+            >
+              <i className="uil uil-moon"></i>
+            </button>
+            <button
+              type="button"
+              className="nav-action-btn language-btn"
+              onClick={handleLanguage}
+            >
+              {languageLabel}
+            </button>
+          </div>
         </div>
       </div>
     </nav>

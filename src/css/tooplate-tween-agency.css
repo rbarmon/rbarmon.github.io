@@ -8,53 +8,59 @@ https://www.tooplate.com/view/2128-tween-agency
 
 
 /*---------------------------------------
-  CUSTOM PROPERTIES ( VARIABLES )             
+  CUSTOM PROPERTIES ( VARIABLES )
 -----------------------------------------*/
 :root {
+  /* Dark Industrial Color Palette */
   --white-color:                  #FFFFFF;
-  --primary-color:                #38b083;
-  --section-bg-color:             #f5f5f5;
-  --border-color:                 #dee2e6;
+  --light-grey:                   #E8E8E8;
+  --primary-color:                #00CCFF; /* Cyan */
+  --secondary-color:              #4A90E2; /* Steel Blue */
+  --accent-color:                 #C0C0C0; /* Silver */
+  --section-bg-color:             #0F0F0F; /* Dark Charcoal */
+  --border-color:                 #2A2A2A;
   --dark-color:                   #000000;
-  --grey-color:                   #fcfeff;
-  --title-color:                  #565758;
-  --p-color:                      #717275;
-  --footer-bg-color:              #07262e;
+  --charcoal-color:               #1A1A1A;
+  --grey-color:                   #2D2D2D;
+  --title-color:                  #FFFFFF;
+  --p-color:                      #B8B8B8;
+  --footer-bg-color:              #0A0A0A;
+  --glass-bg:                     rgba(255, 255, 255, 0.08);
+  --glass-border:                 rgba(255, 255, 255, 0.12);
+  --glow-cyan:                    rgba(0, 204, 255, 0.4);
+  --glow-blue:                    rgba(74, 144, 226, 0.3);
 
-  --body-font-family:             'Karla', sans-serif;
+  /* Typography - Geometric Sans-Serif */
+  --body-font-family:             'Inter', 'Roboto', 'Arial', sans-serif;
+  --heading-font-family:          'Orbitron', 'Exo 2', 'Inter', sans-serif;
 
-  --h1-font-size:                 68px;
-  --h2-font-size:                 42px;
+  --h1-font-size:                 72px;
+  --h2-font-size:                 48px;
   --h3-font-size:                 36px;
-  --h4-font-size:                 32px;
-  --h5-font-size:                 24px;
-  --h6-font-size:                 22px;
-  --p-font-size:                  18px;
-  --menu-font-size:               18px;
-  --copyright-text-font-size:     16px;
+  --h4-font-size:                 28px;
+  --h5-font-size:                 22px;
+  --h6-font-size:                 18px;
+  --p-font-size:                  16px;
+  --menu-font-size:               16px;
+  --copyright-text-font-size:     14px;
   --custom-link-font-size:        14px;
 
   --font-weight-light:            300;
   --font-weight-normal:           400;
-  --font-weight-bold:             600;
+  --font-weight-medium:           500;
+  --font-weight-bold:             700;
 }
 
 body {
-    background: var(--white-color);
-    font-family: var(--body-font-family); 
+    background: var(--section-bg-color);
+    font-family: var(--body-font-family);
+    color: var(--p-color);
+    overflow-x: hidden;
 }
 
 /*---------------------------------------
-  TYPOGRAPHY               
+  TYPOGRAPHY
 -----------------------------------------*/
-
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: var(--dark-color);
-}
 
 h1,
 h2,
@@ -62,16 +68,22 @@ h3,
 h4,
 h5,
 h6 {
+  color: var(--title-color);
+  font-family: var(--heading-font-family);
   font-weight: var(--font-weight-bold);
-  line-height: normal;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
 }
 
 h1 {
   font-size: var(--h1-font-size);
+  font-weight: 900;
+  text-shadow: 0 0 30px var(--glow-cyan);
 }
 
 h2 {
   font-size: var(--h2-font-size);
+  font-weight: var(--font-weight-bold);
 }
 
 h3 {
@@ -93,7 +105,8 @@ h6 {
 p {
   color: var(--p-color);
   font-size: var(--p-font-size);
-  font-weight: var(--font-weight-light);
+  font-weight: var(--font-weight-normal);
+  line-height: 1.6;
 }
 
 a, 
@@ -522,7 +535,7 @@ button:focus:not(:focus-visible) {
   PRICING PLANS               
 -----------------------------------------*/
 .pricing {
-  background-image: url('../images/maria-stewart-p4tj0g-_aMM-unsplash.jpg');
+  background-image: none;
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
@@ -799,5 +812,324 @@ button:focus:not(:focus-visible) {
   .pricing-price {
     max-width: 45px;
     margin-right: auto;
+  }
+}
+
+/*---------------------------------------
+  TRON INDUSTRIAL THEME
+-----------------------------------------*/
+
+/* Glassmorphism Panels */
+.glass-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--glass-border);
+  border-radius: 12px;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.37),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.tron-panel {
+  background: linear-gradient(135deg, rgba(26, 26, 26, 0.9) 0%, rgba(15, 15, 15, 0.95) 100%);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(0, 204, 255, 0.2);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(0, 204, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
+}
+
+.tron-panel:hover {
+  border-color: rgba(0, 204, 255, 0.4);
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.6),
+    0 0 30px rgba(0, 204, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-2px);
+}
+
+/* Main Layout */
+.tron-main {
+  background: var(--section-bg-color);
+  min-height: 100vh;
+}
+
+.tron-section {
+  background: transparent;
+  padding: 4rem 0;
+  position: relative;
+}
+
+.tron-subsection {
+  padding: 2rem 0 !important;
+}
+
+/* Hero Section */
+.tron-hero {
+  background: radial-gradient(ellipse at center, rgba(0, 204, 255, 0.1) 0%, transparent 70%),
+              linear-gradient(135deg, var(--section-bg-color) 0%, var(--charcoal-color) 100%);
+  min-height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.hero-grid {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image:
+    linear-gradient(rgba(0, 204, 255, 0.1) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 204, 255, 0.1) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: gridFlow 20s linear infinite;
+  opacity: 0.3;
+}
+
+.hero-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 800px;
+  height: 800px;
+  background: radial-gradient(circle, rgba(0, 204, 255, 0.15) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes gridFlow {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(50px, 50px); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.3; transform: translate(-50%, -50%) scale(1); }
+  50% { opacity: 0.6; transform: translate(-50%, -50%) scale(1.1); }
+}
+
+/* Hero Content */
+.hero-panel {
+  position: relative;
+  z-index: 10;
+  padding: 3rem;
+}
+
+.hero-image-panel {
+  position: relative;
+  z-index: 10;
+  padding: 2rem;
+  text-align: center;
+}
+
+.tron-hero-title {
+  background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-family: var(--heading-font-family);
+  font-weight: 900;
+  text-shadow: none;
+}
+
+/* Section Titles */
+.tron-section-title {
+  color: var(--title-color);
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.tron-section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+  box-shadow: 0 0 10px var(--glow-cyan);
+}
+
+/* Tech Icons */
+.tech-icons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.tech-icons i {
+  font-size: 2.5rem;
+  transition: all 0.3s ease;
+  filter: brightness(0.8);
+}
+
+.tech-icons i:hover {
+  transform: translateY(-3px) scale(1.1);
+  filter: brightness(1.2) drop-shadow(0 0 10px currentColor);
+}
+
+/* Timeline Enhancements */
+.timeline {
+  position: relative;
+  background: transparent;
+}
+
+.timeline::before {
+  background: linear-gradient(180deg, var(--primary-color), var(--secondary-color));
+  box-shadow: 0 0 10px var(--glow-cyan);
+}
+
+.tron-date {
+  background: var(--glass-bg);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: 0.5rem 1rem;
+  color: var(--primary-color);
+  font-weight: var(--font-weight-medium);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* Footer */
+.tron-footer {
+  background: linear-gradient(135deg, var(--footer-bg-color) 0%, var(--charcoal-color) 100%);
+  border-top: 1px solid var(--border-color);
+  position: relative;
+}
+
+.tron-footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+  box-shadow: 0 0 10px var(--glow-cyan);
+}
+
+/* Custom Buttons */
+.custom-btn {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border: none;
+  border-radius: 6px;
+  color: var(--white-color);
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(0, 204, 255, 0.3);
+}
+
+.custom-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 204, 255, 0.4);
+  filter: brightness(1.1);
+}
+
+.custom-bg-dark {
+  background: linear-gradient(135deg, var(--charcoal-color), var(--dark-color));
+  border: 1px solid var(--border-color);
+}
+
+.custom-bg-dark:hover {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  border-color: var(--primary-color);
+}
+
+/* Navigation Updates */
+.navbar {
+  background: rgba(15, 15, 15, 0.95);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 204, 255, 0.2);
+}
+
+.navbar-brand {
+  color: var(--title-color) !important;
+  font-family: var(--heading-font-family);
+  font-weight: 900;
+}
+
+.navbar-nav .nav-link {
+  color: var(--p-color) !important;
+  font-family: var(--heading-font-family);
+  font-weight: var(--font-weight-medium);
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+  color: var(--primary-color) !important;
+  text-shadow: 0 0 10px var(--glow-cyan);
+}
+
+/* Responsive Updates */
+@media screen and (max-width: 991px) {
+  .navbar {
+    background: rgba(15, 15, 15, 0.98);
+  }
+
+  .navbar-brand {
+    color: var(--title-color) !important;
+  }
+
+  .navbar-nav .nav-link {
+    color: var(--p-color) !important;
+  }
+
+  .tron-hero-title {
+    font-size: 48px;
+  }
+
+  .hero-panel {
+    padding: 2rem;
+  }
+
+  .tron-panel {
+    padding: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  .tron-hero-title {
+    font-size: 36px;
+  }
+
+  .hero-panel {
+    padding: 1.5rem;
+  }
+
+  .tron-panel {
+    padding: 1rem;
+  }
+
+  .tech-icons {
+    gap: 1rem;
+  }
+
+  .tech-icons i {
+    font-size: 2rem;
   }
 }
