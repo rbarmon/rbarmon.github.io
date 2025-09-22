@@ -14,7 +14,8 @@ const Navbar = ({ language, onToggleLanguage, isDarkMode, onToggleDarkMode, logo
   const [isOpen, setIsOpen] = useState(false);
   const [currentWordIndex, setCurrentWordIndex] = useState(0);
 
-  const impactWords = ['impact', 'change', 'innovation', 'solutions', 'growth', 'excellence', 'progress'];
+  const impactWords = ['Impact', 'Change', 'Innovation', 'Solutions', 'Growth', 'Excellence', 'Progress'];
+  const inputType = 'Idea';
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -55,17 +56,17 @@ const Navbar = ({ language, onToggleLanguage, isDarkMode, onToggleDarkMode, logo
     <nav className="glass-navbar" style={style}>
       <div className="nav-container">
         <a className="nav-brand" href="#about">
-          <div className="functional-logo">
-            <span className="function-def">const</span>
-            <span className="function-name">&nbsp;rian</span>
-            <span className="function-params">&nbsp;=&nbsp;(x)&nbsp;</span>
-            <span className="arrow">=>&nbsp;</span>
+          <div className="functional-logo" aria-label="rian type signature">
+            <span className="function-def">λ</span>
+            <span className="function-name">rian</span>
+            <span className="function-type">&nbsp;::&nbsp;</span>
+            <span className="function-params">{inputType}</span>
+            <span className="arrow">&nbsp;-&gt;&nbsp;</span>
             <span className="function-output">
               <span className="rotating-word" key={currentWordIndex}>
                 {impactWords[currentWordIndex]}
               </span>
             </span>
-            <span className="function-type">;</span>
           </div>
         </a>
 
@@ -99,16 +100,17 @@ const Navbar = ({ language, onToggleLanguage, isDarkMode, onToggleDarkMode, logo
               type="button"
               className="nav-action-btn"
               onClick={handleDarkMode}
-              title="Toggle Dark Mode"
+              title={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}
             >
-              <i className="uil uil-moon"></i>
+              <i className={isDarkMode ? "uil uil-sun" : "uil uil-moon"}></i>
             </button>
             <button
               type="button"
               className="nav-action-btn language-btn"
               onClick={handleLanguage}
+              title={language === 'en' ? 'Switch to Japanese' : 'Switch to English'}
             >
-              {languageLabel}
+              <i className="uil uil-globe"></i>
             </button>
           </div>
         </div>

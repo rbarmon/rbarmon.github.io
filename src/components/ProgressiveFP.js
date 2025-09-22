@@ -3,12 +3,15 @@ import React, { useState, useEffect, useRef } from 'react';
 const ProgressiveFP = ({ onComplete }) => {
   const [stage, setStage] = useState(0);
   const [scrollY, setScrollY] = useState(0);
+  const [currentWordIndex, setCurrentWordIndex] = useState(0);
   const containerRef = useRef(null);
 
+  const impactWords = ['Impact', 'Change', 'Innovation', 'Solutions', 'Growth', 'Excellence', 'Progress'];
+
   // Stages:
-  // 0: rian(x) => impact (simple)
-  // 1: const rian = (x) => impact; (expanded)
-  // 2: Full content reveal
+  // 0: λrian (simple lambda)
+  // 1: λrian :: Idea -> Impact (full type signature)
+  // 2: λrian :: Idea -> [rotating words] (dynamic output)
   // 3: Scroll to navbar
 
   useEffect(() => {
@@ -53,6 +56,17 @@ const ProgressiveFP = ({ onComplete }) => {
     };
   }, [onComplete]);
 
+  // Word rotation effect for stage 2
+  useEffect(() => {
+    if (stage >= 2) {
+      const interval = setInterval(() => {
+        setCurrentWordIndex((prev) => (prev + 1) % impactWords.length);
+      }, 2000); // Change word every 2 seconds
+
+      return () => clearInterval(interval);
+    }
+  }, [stage, impactWords.length]);
+
   const getTransform = () => {
     const progress = Math.min(scrollY / 600, 1);
     const scale = 1 - progress * 0.3;
@@ -66,29 +80,34 @@ const ProgressiveFP = ({ onComplete }) => {
       className={`progressive-fp stage-${stage}`}
       style={{ transform: getTransform() }}
     >
-      {/* Stage 0: Simple FP notation */}
+      {/* Stage 0: Simple lambda */}
       <div className={`fp-stage fp-simple ${stage >= 1 ? 'fade-out' : 'active'}`}>
+        <span className="fp-const">λ</span>
         <span className="fp-name">rian</span>
-        <span className="fp-params">(x)</span>
-        <span className="fp-arrow"> => </span>
-        <span className="fp-output">impact</span>
       </div>
 
-      {/* Stage 1: Expanded FP notation */}
+      {/* Stage 1: Full Haskell-style type signature */}
       <div className={`fp-stage fp-expanded ${stage === 1 ? 'active' : stage > 1 ? 'fade-out' : 'hidden'}`}>
-        <span className="fp-const">const</span>
-        <span className="fp-name"> rian</span>
-        <span className="fp-equals"> = </span>
-        <span className="fp-params">(x)</span>
-        <span className="fp-arrow"> => </span>
-        <span className="fp-output">impact</span>
-        <span className="fp-semicolon">;</span>
+        <span className="fp-const">λ</span>
+        <span className="fp-name">rian</span>
+        <span className="fp-equals"> :: </span>
+        <span className="fp-params">Idea</span>
+        <span className="fp-arrow"> -> </span>
+        <span className="fp-output">Impact</span>
       </div>
 
-      {/* Stage 2: Greeting reveal */}
-      <div className={`fp-stage fp-greeting ${stage >= 2 ? 'active' : 'hidden'}`}>
-        <h1 className="greeting-text">Hi, I'm Rian</h1>
-        <p className="greeting-subtitle">Transforming ideas into digital impact</p>
+      {/* Stage 2: Dynamic rotating type signature */}
+      <div className={`fp-stage fp-expanded ${stage >= 2 ? 'active' : 'hidden'}`}>
+        <span className="fp-const">λ</span>
+        <span className="fp-name">rian</span>
+        <span className="fp-equals"> :: </span>
+        <span className="fp-params">Idea</span>
+        <span className="fp-arrow"> -> </span>
+        <span className="fp-output">
+          <span className="rotating-word" key={currentWordIndex}>
+            {impactWords[currentWordIndex]}
+          </span>
+        </span>
       </div>
 
       {/* Scroll indicator */}

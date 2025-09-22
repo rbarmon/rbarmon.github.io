@@ -128,8 +128,8 @@ const timelineItems = [
     id: 'mejora',
     alignment: 'left',
     date: {
-      en: 'Apr 2024 – Present',
-      ja: '2024年4月～現在',
+      en: 'Apr 2024 – Aug 2024',
+      ja: '2024年4月～2024年8月',
     },
     title: {
       en: 'Software Engineer Intern at MEJORA Corporation',
@@ -956,6 +956,24 @@ const TimelineItem = ({ item }) => (
   </div>
 );
 
+const TechIcons = () => (
+  <div className="tech-grid">
+    <i className="devicon-javascript-plain tech-icon" title="JavaScript"></i>
+    <i className="devicon-react-original tech-icon" title="React.js"></i>
+    <i className="devicon-python-plain tech-icon" title="Python"></i>
+    <i className="devicon-java-plain tech-icon" title="Java"></i>
+    <i className="devicon-html5-plain tech-icon" title="HTML5"></i>
+    <i className="devicon-css3-plain tech-icon" title="CSS3"></i>
+    <i className="devicon-typescript-plain tech-icon" title="TypeScript"></i>
+    <i className="devicon-swift-plain tech-icon" title="Swift"></i>
+    <i className="devicon-postgresql-plain tech-icon" title="SQL (PostgreSQL)"></i>
+    <i className="devicon-firebase-plain tech-icon" title="Firebase"></i>
+    <i className="devicon-docker-plain tech-icon" title="Docker"></i>
+    <i className="devicon-figma-plain tech-icon" title="Figma"></i>
+    <i className="devicon-tableau-plain tech-icon" title="Tableau"></i>
+  </div>
+);
+
 const HackathonCard = ({ project }) => (
   <div className="industrial-panel" style={{ marginBottom: '2rem' }}>
     <div className="row">
@@ -1007,38 +1025,24 @@ const HackathonCard = ({ project }) => (
   </div>
 );
 
-const TechIcons = () => (
-  <div className="tech-grid">
-    <i className="devicon-javascript-plain tech-icon" title="JavaScript"></i>
-    <i className="devicon-react-original tech-icon" title="React.js"></i>
-    <i className="devicon-python-plain tech-icon" title="Python"></i>
-    <i className="devicon-java-plain tech-icon" title="Java"></i>
-    <i className="devicon-html5-plain tech-icon" title="HTML5"></i>
-    <i className="devicon-css3-plain tech-icon" title="CSS3"></i>
-    <i className="devicon-typescript-plain tech-icon" title="TypeScript"></i>
-    <i className="devicon-swift-plain tech-icon" title="Swift"></i>
-    <i className="devicon-postgresql-plain tech-icon" title="SQL (PostgreSQL)"></i>
-    <i className="devicon-firebase-plain tech-icon" title="Firebase"></i>
-    <i className="devicon-docker-plain tech-icon" title="Docker"></i>
-    <i className="devicon-figma-plain tech-icon" title="Figma"></i>
-    <i className="devicon-tableau-plain tech-icon" title="Tableau"></i>
-  </div>
-);
-
 function MainPage() {
   const [language, setLanguage] = useState('en');
-  const [isDarkMode, setIsDarkMode] = useState(false);
-  const [showProgressiveFP, setShowProgressiveFP] = useState(true);
-  const [showMainContent, setShowMainContent] = useState(false);
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  // Temporarily disabled progressive effect
+  // const [showProgressiveFP, setShowProgressiveFP] = useState(true);
+  // const [showMainContent, setShowMainContent] = useState(false);
+  const [showProgressiveFP, setShowProgressiveFP] = useState(false);
+  const [showMainContent, setShowMainContent] = useState(true);
 
   useEffect(() => {
-    document.body.classList.toggle('dark-mode', isDarkMode);
+    document.body.classList.toggle('light-mode', !isDarkMode);
   }, [isDarkMode]);
 
-  const handleProgressiveComplete = () => {
-    setShowProgressiveFP(false);
-    setShowMainContent(true);
-  };
+  // Temporarily disabled progressive effect callback
+  // const handleProgressiveComplete = () => {
+  //   setShowProgressiveFP(false);
+  //   setShowMainContent(true);
+  // };
 
   const toggleLanguage = () => {
     setLanguage((prev) => (prev === 'en' ? 'ja' : 'en'));
@@ -1052,58 +1056,107 @@ function MainPage() {
     ? '/images/logo/black_favicon_nonbg.png'
     : '/images/logo/white_favicon_nonbg.png';
 
-  const aboutParagraphs = useMemo(
+  const heroName = useMemo(
+    () => ({
+      en: 'Rian Kawahara',
+      ja: '河原理安',
+    }),
+    []
+  );
+
+  const heroJobTitle = useMemo(
+    () => ({
+      en: 'Software Engineer / Solution Engineer',
+      ja: 'ソフトウェアエンジニア／ソリューションエンジニア',
+    }),
+    []
+  );
+
+  const heroHighlights = useMemo(
     () => [
       {
-        en: "Welcome to my portfolio website!",
-        ja: '私のポートフォリオウェブサイトへようこそ！',
+        en: 'Ship SaaS features end-to-end across React, Node.js, Kotlin, and cloud databases.',
+        ja: 'React、Node.js、Kotlin、クラウドデータベースを活用し、SaaS機能をエンドツーエンドで開発します。',
       },
       {
-        en: 'I am a Bachelor of Computer Science student at Monash University.',
-        ja: 'モナッシュ大学でコンピュータサイエンスの学士号を取得しています。',
+        en: 'Design CRM and messaging integrations for HubSpot, LINE, Salesforce, and Klaviyo.',
+        ja: 'HubSpot、LINE、Salesforce、Klaviyo向けのCRM・メッセージング連携を設計・実装します。',
       },
       {
-        en: "I'm a computer Science student passionate about the intersection of Software Development and Data Science, and how these fields can come together to create powerful and impactful projects. At university, I studied Computer Science, Data Science, and Software Development with the intention of using my experience to develop products and perform analysis.",
-        ja: '私は学生時代にソフトウェア開発に力を入れてきました。大学でコンピュータサイエンス、データサイエンス、そしてソフトウェア開発を勉強し、これまでの経験を活かし製品を開発し、その分析を行うつもりで学んできました。',
-      },
-      {
-        en: 'Currently, as a full-stack engineer, I utilize my experience in algorithms, Python, and React to communicate information clearly through data analysis and visualization, building engaging and user-friendly web experiences.',
-        ja: '現在、フルスタックエンジニアとしての経験、アルゴリズム、Python、Reactのスキルを活かし、データ分析や可視化を通じて情報を分かりやすく伝え、魅力的でユーザーフレンドリーなウェブ体験を構築しています。',
+        en: 'Prototype AI-assisted workflows with OpenAI API, Python, and analytics pipelines.',
+        ja: 'OpenAI API、Python、分析パイプラインを用いてAI支援ワークフローをプロトタイピングします。',
       },
     ],
     []
   );
 
+  const keySkills = useMemo(
+    () => [
+      {
+        category: {
+          en: 'Full-stack development:',
+          ja: 'フルスタック開発：',
+        },
+        items: {
+          en: 'React, Kotlin, Node.js, Firebase, PostgreSQL, MongoDB',
+          ja: 'React、Kotlin、Node.js、Firebase、PostgreSQL、MongoDB',
+        },
+      },
+      {
+        category: {
+          en: 'SaaS & CRM integrations:',
+          ja: 'SaaS・CRM連携：',
+        },
+        items: {
+          en: 'HubSpot, LINE Messaging API, Salesforce, Klaviyo',
+          ja: 'HubSpot、LINE Messaging API、Salesforce、Klaviyo',
+        },
+      },
+      {
+        category: {
+          en: 'AI & Data:',
+          ja: 'AI・データ：',
+        },
+        items: {
+          en: 'OpenAI API, Python, Pandas, Data Analysis',
+          ja: 'OpenAI API、Python、Pandas、データ分析',
+        },
+      },
+    ],
+    []
+  );
+
+  const resumeLinks = useMemo(
+    () => ({
+      en: 'https://drive.google.com/uc?export=download&id=YOUR_ENGLISH_FILE_ID_HERE',
+      ja: 'https://drive.google.com/uc?export=download&id=YOUR_JAPANESE_FILE_ID_HERE',
+    }),
+    []
+  );
+
   return (
     <LanguageContext.Provider value={{ language }}>
-      {/* Progressive FP Effect */}
-      {showProgressiveFP && (
+      {/* Progressive FP Effect - Temporarily disabled */}
+      {/* {showProgressiveFP && (
         <ProgressiveFP onComplete={handleProgressiveComplete} />
-      )}
+      )} */}
 
-      {/* Navigation - shows after progressive effect */}
+      {/* Navigation */}
       <Navbar
         language={language}
         onToggleLanguage={toggleLanguage}
         isDarkMode={isDarkMode}
         onToggleDarkMode={toggleDarkMode}
         logoSrc={logoSrc}
-        style={{
-          opacity: showMainContent ? 1 : 0,
-          transition: 'opacity 0.5s ease-in-out'
-        }}
       />
 
-      {/* Spacer for progressive effect scroll */}
-      <div style={{
+      {/* Spacer for progressive effect scroll - Temporarily disabled */}
+      {/* <div style={{
         height: showProgressiveFP ? '100vh' : '0vh',
         transition: 'height 0.8s ease-in-out'
-      }}></div>
+      }}></div> */}
 
-      <main style={{
-        opacity: showMainContent ? 1 : 0,
-        transition: 'opacity 0.8s ease-in-out 0.3s'
-      }}>
+      <main>
         <section className="hero-section" id="about">
           <VideoBackground />
           <div className="hero-background" aria-hidden="true">
@@ -1112,24 +1165,68 @@ function MainPage() {
           </div>
           <div className="container" style={{ position: 'relative', zIndex: 10 }}>
             <div className="row">
-              <div className="col-lg-7 col-md-12 col-12 d-flex align-items-center">
-                <div className="glass-panel hero-content-panel" style={{ padding: '3rem', width: '100%' }}>
-                  <TranslatedText as="h1" className="hero-title" en="Hi, I'm Rian" ja="Hi, I'm Rian" />
-                  {aboutParagraphs.map((paragraph) => (
-                    <TranslatedText
-                      key={paragraph.en}
-                      as="p"
-                      en={paragraph.en}
-                      ja={paragraph.ja}
-                    />
-                  ))}
-                  <TranslatedText as="p" en="Tech Stack:" ja="技術スタック:" />
-                  <TechIcons />
-                  <div style={{ display: 'flex', gap: '1rem', marginTop: '2rem', flexWrap: 'wrap' }}>
+              <div className="col-lg-7 col-md-7 col-8 d-flex align-items-center">
+                <div className="glass-panel hero-content-panel" style={{ padding: 'clamp(1.5rem, 4vw, 3rem)', width: '100%' }}>
+                  <TranslatedText
+                    as="h1"
+                    className="hero-title"
+                    en={heroJobTitle.en}
+                    ja={heroJobTitle.ja}
+                    style={{ marginBottom: '1.5rem' }}
+                  />
+                  <ul className="hero-summary-list">
+                    {heroHighlights.map((item) => (
+                      <TranslatedText
+                        key={item.en}
+                        as="li"
+                        className="hero-summary-item"
+                        en={item.en}
+                        ja={item.ja}
+                      />
+                    ))}
+                  </ul>
+                  <TranslatedText
+                    as="h3"
+                    className="hero-subheading"
+                    en="Key Skills"
+                    ja="主なスキル"
+                  />
+                  <dl className="hero-key-skills">
+                    {keySkills.map((skill) => (
+                      <div className="hero-key-skill" key={skill.category.en}>
+                        <TranslatedText
+                          as="dt"
+                          className="hero-skill-category"
+                          en={skill.category.en}
+                          ja={skill.category.ja}
+                        />
+                        <TranslatedText
+                          as="dd"
+                          className="hero-skill-items"
+                          en={skill.items.en}
+                          ja={skill.items.ja}
+                        />
+                      </div>
+                    ))}
+                  </dl>
+                </div>
+              </div>
+              <div className="col-lg-5 col-md-5 col-4">
+                <div className="glass-panel hero-image-panel" style={{ padding: 'clamp(1rem, 3vw, 2rem)', textAlign: 'center' }}>
+                  <img src="/images/profile/big/profile1.png" className="img-fluid" alt="Profile" style={{ marginBottom: '1.5rem' }} />
+                  <TranslatedText
+                    as="h2"
+                    className="hero-title"
+                    en={heroName.en}
+                    ja={heroName.ja}
+                    style={{ marginBottom: '1.5rem' }}
+                  />
+                  <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
                     <a
-                      href="/resume/resume.pdf"
+                      href={resumeLinks[language]}
                       className="btn-primary"
-                      download="resume.pdf"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}
                     >
                       <i className="uil uil-file-alt"></i>
@@ -1146,9 +1243,37 @@ function MainPage() {
                   </div>
                 </div>
               </div>
-              <div className="col-lg-5 col-md-12 col-12">
-                <div className="glass-panel hero-image-panel" style={{ padding: '2rem', textAlign: 'center' }}>
-                  <img src="/images/profile/big/profile1.png" className="img-fluid" alt="Profile" />
+            </div>
+          </div>
+        </section>
+
+        <section className="section" id="skills" style={{ paddingTop: 'var(--space-2xl)', paddingBottom: 'var(--space-2xl)' }}>
+          <div className="container">
+            <SectionHeading title={{ en: 'Key Skills', ja: '主なスキル' }} />
+            <div className="row justify-content-center">
+              <div className="col-lg-8 col-md-10 col-12">
+                <div className="glass-panel" style={{ padding: '2.5rem' }}>
+                  <dl className="hero-key-skills">
+                    {keySkills.map((skill) => (
+                      <div className="hero-key-skill" key={skill.category.en}>
+                        <TranslatedText
+                          as="dt"
+                          className="hero-skill-category"
+                          en={skill.category.en}
+                          ja={skill.category.ja}
+                        />
+                        <TranslatedText
+                          as="dd"
+                          className="hero-skill-items"
+                          en={skill.items.en}
+                          ja={skill.items.ja}
+                        />
+                      </div>
+                    ))}
+                  </dl>
+                  <div style={{ marginTop: '2rem' }}>
+                    <TechIcons />
+                  </div>
                 </div>
               </div>
             </div>
@@ -1218,9 +1343,10 @@ function MainPage() {
             <div className="col-lg-5 col-12 me-auto mb-4">
               <h5 style={{ color: 'var(--text-primary)', marginBottom: '1.5rem' }}>Resume</h5>
               <a
-                href="/resume/resume.pdf"
+                href={resumeLinks[language]}
                 className="btn-primary"
-                download="resume.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: 'fit-content' }}
               >
                 <i className="uil uil-file-alt"></i>
