@@ -138,8 +138,8 @@ const timelineItems = [
     content: [
       {
         type: 'paragraph',
-        en: 'I am currently working as a software engineer at MEJORA Corporation under the direct supervision of the CEO, in a team of four. We work in a flat organizational structure, where I am entrusted with proposing product directions and implementing features. The technology stack I use includes React, Firebase, Firestore, and the OpenAI API. I am responsible for developing applications using generative AI.',
-        ja: '現在、MEJORA株式会社でCEOの直接指導の下、4人チームでソフトウェアエンジニアとして働いています。フラットな組織構造で、製品の方向性提案や機能実装を任されています。使用している技術スタックは、React、Firebase、Firestore、OpenAI APIです。生成AIを活用したアプリケーション開発を担当しています。',
+        en: 'I worked as a software engineer at MEJORA Corporation under the direct supervision of the CEO, in a team of four. We worked in a flat organizational structure, where I was entrusted with proposing product directions and implementing features. The technology stack I used included React, Firebase, Firestore, and the OpenAI API. I was responsible for developing applications using generative AI.',
+        ja: 'MEJORA株式会社でCEOの直接指導の下、4人チームでソフトウェアエンジニアとして働きました。フラットな組織構造で、製品の方向性提案や機能実装を任されました。使用していた技術スタックは、React、Firebase、Firestore、OpenAI APIでした。生成AIを活用したアプリケーション開発を担当していました。',
       },
       {
         type: 'paragraph',
