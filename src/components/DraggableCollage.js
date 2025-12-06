@@ -854,9 +854,6 @@ const DraggableCollage = ({ name, jobTitle }) => {
           />
         ))}
 
-        <div className="collage-hint">
-          Drag items to rearrange
-        </div>
       </div>
     </div>
   );
