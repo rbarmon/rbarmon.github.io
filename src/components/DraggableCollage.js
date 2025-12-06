@@ -805,11 +805,13 @@ const DraggableCollage = ({ name, jobTitle }) => {
     // Scale x based on container width
     let x = positionPercent.x * containerSize.width;
 
-    // For y: use reference height scaled to container, then center vertically
-    // This keeps items clustered in the center rather than spreading when container gets taller
-    const scaledHeight = Math.min(containerSize.height, REFERENCE_HEIGHT * (containerSize.width / REFERENCE_WIDTH));
-    const yOffset = (containerSize.height - scaledHeight) / 2; // Center the layout vertically
-    const y = yOffset + (positionPercent.y * scaledHeight);
+    // For y: blend between full container height and aspect-ratio-locked height
+    // This prevents items from spreading too much on tall screens while keeping them centered
+    const aspectLockedHeight = REFERENCE_HEIGHT * (containerSize.width / REFERENCE_WIDTH);
+    // Use 70% of the extra height to allow some spread but not full spread
+    const effectiveHeight = aspectLockedHeight + (containerSize.height - aspectLockedHeight) * 0.7;
+    const yOffset = (containerSize.height - effectiveHeight) / 2;
+    const y = yOffset + (positionPercent.y * effectiveHeight);
 
     // If centerX is true, center the element by subtracting half its width
     if (centerX && elementWidth) {
