@@ -185,8 +185,8 @@ a:hover {
   COLLAGE HERO
 -----------------------------------------*/
 .collage-hero {
-  padding: var(--space-3xl) var(--space-lg);
-  min-height: 100vh;
+  padding: var(--space-md) var(--space-lg) var(--space-lg);
+  min-height: auto;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -194,19 +194,19 @@ a:hover {
 
 .collage-header {
   text-align: center;
-  margin-bottom: var(--space-2xl);
+  margin-bottom: 0;
 }
 
 .collage-name {
-  font-size: var(--text-5xl);
+  font-size: var(--text-4xl);
   font-weight: 700;
   color: var(--text-primary);
-  margin-bottom: var(--space-sm);
-  letter-spacing: -0.03em;
+  margin-bottom: 2px;
+  letter-spacing: -0.02em;
 }
 
 .collage-title {
-  font-size: var(--text-xl);
+  font-size: var(--text-lg);
   color: var(--text-secondary);
   font-weight: 400;
 }

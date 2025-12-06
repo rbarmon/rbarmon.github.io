@@ -7,7 +7,7 @@ const collageItems = [
     type: 'university-badge',
     university: 'Monash University',
     degree: 'B.S. Computer Science',
-    initialPosition: { x: 50, y: 80 },
+    initialPosition: { x: 40, y: 50 },
     rotation: -3,
     zIndex: 10,
   },
@@ -16,7 +16,7 @@ const collageItems = [
     type: 'image',
     src: '/images/profile/big/profile1.png',
     alt: 'Rian Kawahara',
-    initialPosition: { x: 400, y: 60 },
+    initialPosition: { x: 850, y: 40 },
     size: { width: 200, height: 'auto' },
     rotation: 2,
     zIndex: 15,
@@ -26,7 +26,7 @@ const collageItems = [
     type: 'tech-badge',
     icon: 'devicon-react-original',
     label: 'React',
-    initialPosition: { x: 280, y: 300 },
+    initialPosition: { x: 120, y: 550 },
     rotation: 5,
     zIndex: 12,
   },
@@ -35,7 +35,7 @@ const collageItems = [
     type: 'tech-badge',
     icon: 'devicon-typescript-plain',
     label: 'TypeScript',
-    initialPosition: { x: 150, y: 350 },
+    initialPosition: { x: 50, y: 380 },
     rotation: -4,
     zIndex: 11,
   },
@@ -44,7 +44,7 @@ const collageItems = [
     type: 'tech-badge',
     icon: 'devicon-python-plain',
     label: 'Python',
-    initialPosition: { x: 500, y: 320 },
+    initialPosition: { x: 950, y: 550 },
     rotation: 3,
     zIndex: 13,
   },
@@ -53,7 +53,7 @@ const collageItems = [
     type: 'tech-badge',
     icon: 'devicon-kotlin-plain',
     label: 'Kotlin',
-    initialPosition: { x: 620, y: 180 },
+    initialPosition: { x: 980, y: 320 },
     rotation: -2,
     zIndex: 11,
   },
@@ -62,7 +62,7 @@ const collageItems = [
     type: 'achievement',
     title: 'Tokyo Hackathon',
     subtitle: 'Business Award 2024',
-    initialPosition: { x: 580, y: 350 },
+    initialPosition: { x: 880, y: 600 },
     rotation: 4,
     zIndex: 14,
   },
@@ -70,7 +70,7 @@ const collageItems = [
     id: 'article-note',
     type: 'sticky-note',
     text: 'Featured in\nDiamondhead\nIntern Article',
-    initialPosition: { x: 80, y: 280 },
+    initialPosition: { x: 30, y: 200 },
     rotation: -5,
     color: '#FEF3C7',
     zIndex: 9,
@@ -79,7 +79,7 @@ const collageItems = [
     id: 'location',
     type: 'location-tag',
     text: 'Tokyo, Japan',
-    initialPosition: { x: 350, y: 420 },
+    initialPosition: { x: 520, y: 650 },
     rotation: 0,
     zIndex: 10,
   },
@@ -321,15 +321,15 @@ const CollageItem = ({ item, onDragStart, onDragStop }) => {
 };
 
 const DraggableCollage = ({ name, jobTitle }) => {
-  const [containerHeight, setContainerHeight] = useState(500);
+  const [containerHeight, setContainerHeight] = useState(750);
   const containerRef = useRef(null);
 
   useEffect(() => {
     const updateHeight = () => {
       if (window.innerWidth < 768) {
-        setContainerHeight(600);
+        setContainerHeight(700);
       } else {
-        setContainerHeight(500);
+        setContainerHeight(750);
       }
     };
 
@@ -340,11 +340,6 @@ const DraggableCollage = ({ name, jobTitle }) => {
 
   return (
     <div className="collage-hero">
-      <div className="collage-header">
-        <h1 className="collage-name">{name}</h1>
-        <p className="collage-title">{jobTitle}</p>
-      </div>
-
       <div
         ref={containerRef}
         className="collage-container"
@@ -352,11 +347,27 @@ const DraggableCollage = ({ name, jobTitle }) => {
           position: 'relative',
           height: containerHeight,
           width: '100%',
-          maxWidth: '800px',
+          maxWidth: '1200px',
           margin: '0 auto',
           overflow: 'hidden',
         }}
       >
+        {/* Centered name/title */}
+        <div
+          style={{
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+            textAlign: 'center',
+            zIndex: 5,
+            pointerEvents: 'none',
+          }}
+        >
+          <h1 className="collage-name">{name}</h1>
+          <p className="collage-title">{jobTitle}</p>
+        </div>
+
         {collageItems.map((item) => (
           <CollageItem key={item.id} item={item} />
         ))}
