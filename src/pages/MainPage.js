@@ -283,10 +283,12 @@ const techStack = [
   { icon: 'devicon-figma-plain', name: 'Figma' },
 ];
 
-// Navbar Component
+// Navbar Component with Dock-style magnification
 const Navbar = ({ language, onToggleLanguage, isDarkMode, onToggleDarkMode, showNav, activeSection }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [hoveredIndex, setHoveredIndex] = useState(null);
+  const navRef = React.useRef(null);
 
   useEffect(() => {
     const checkMobile = () => setIsMobile(window.innerWidth < 768);
@@ -298,6 +300,24 @@ const Navbar = ({ language, onToggleLanguage, isDarkMode, onToggleDarkMode, show
   const handleNavClick = () => {
     setMobileMenuOpen(false);
   };
+
+  // Calculate scale based on distance from hovered item (Dock effect)
+  const getScale = (index) => {
+    if (hoveredIndex === null) return 1;
+    const distance = Math.abs(index - hoveredIndex);
+    if (distance === 0) return 1.25;
+    if (distance === 1) return 1.1;
+    return 1;
+  };
+
+  const navItems = [
+    { type: 'link', href: '#about', label: '↑', isTop: true },
+    { type: 'link', href: '#about', labelEn: 'About', labelJa: '紹介', section: 'about' },
+    { type: 'link', href: '#work', labelEn: 'Work', labelJa: '職歴', section: 'work' },
+    { type: 'link', href: '#contact', labelEn: 'Contact', labelJa: '連絡', section: 'contact' },
+    { type: 'button', action: 'language', label: language === 'en' ? 'JP' : 'EN' },
+    { type: 'button', action: 'darkMode', label: isDarkMode ? '☀️' : '🌙' },
+  ];
 
   // Mobile navbar
   if (isMobile) {
@@ -339,33 +359,55 @@ const Navbar = ({ language, onToggleLanguage, isDarkMode, onToggleDarkMode, show
     );
   }
 
-  // Desktop navbar (existing bubble style)
+  // Desktop navbar with Dock-style magnification
   return (
     <nav
-      className="notion-navbar"
+      className="notion-navbar-dock"
+      ref={navRef}
       style={{
         opacity: showNav ? 1 : 0,
         pointerEvents: showNav ? 'auto' : 'none',
         transition: 'opacity 0.3s ease',
       }}
+      onMouseLeave={() => setHoveredIndex(null)}
     >
-      <div className="navbar-content">
-        <a href="#about" className="nav-bubble">↑</a>
-        <a href="#about" className={`nav-bubble ${activeSection === 'about' ? 'nav-bubble-active' : ''}`}>
-          <TranslatedText en="About" ja="紹介" />
-        </a>
-        <a href="#work" className={`nav-bubble ${activeSection === 'work' ? 'nav-bubble-active' : ''}`}>
-          <TranslatedText en="Work" ja="職歴" />
-        </a>
-        <a href="#contact" className={`nav-bubble ${activeSection === 'contact' ? 'nav-bubble-active' : ''}`}>
-          <TranslatedText en="Contact" ja="連絡" />
-        </a>
-        <button className="nav-bubble" onClick={onToggleLanguage}>
-          {language === 'en' ? 'JP' : 'EN'}
-        </button>
-        <button className="nav-bubble" onClick={onToggleDarkMode}>
-          {isDarkMode ? '☀️' : '🌙'}
-        </button>
+      <div className="dock-container">
+        {navItems.map((item, index) => {
+          const scale = getScale(index);
+          const isActive = item.section && activeSection === item.section;
+
+          if (item.type === 'link') {
+            return (
+              <a
+                key={index}
+                href={item.href}
+                className={`dock-item ${isActive ? 'dock-item-active' : ''}`}
+                style={{
+                  transform: `scale(${scale})`,
+                  zIndex: hoveredIndex === index ? 10 : 1,
+                }}
+                onMouseEnter={() => setHoveredIndex(index)}
+              >
+                {item.isTop ? item.label : <TranslatedText en={item.labelEn} ja={item.labelJa} />}
+              </a>
+            );
+          }
+
+          return (
+            <button
+              key={index}
+              className="dock-item"
+              style={{
+                transform: `scale(${scale})`,
+                zIndex: hoveredIndex === index ? 10 : 1,
+              }}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onClick={item.action === 'language' ? onToggleLanguage : onToggleDarkMode}
+            >
+              {item.label}
+            </button>
+          );
+        })}
       </div>
     </nav>
   );
