@@ -186,7 +186,7 @@ a:hover {
 -----------------------------------------*/
 .collage-hero {
   padding: 0;
-  height: calc(100vh - 40px);
+  height: 100vh;
   max-height: 900px;
   display: flex;
   flex-direction: column;
@@ -234,68 +234,75 @@ a:hover {
 -----------------------------------------*/
 .notion-navbar {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: 50%;
+  right: var(--space-md);
+  transform: translateY(-50%);
   z-index: 1000;
-  background: var(--bg-primary);
-  border-bottom: 1px solid var(--border-light);
-  padding: var(--space-sm) var(--space-lg);
+  pointer-events: none;
 }
 
 .navbar-content {
-  max-width: 1200px;
-  margin: 0 auto;
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-}
-
-.navbar-brand {
-  font-weight: 600;
-  font-size: var(--text-base);
-  color: var(--text-primary);
-}
-
-.navbar-links {
-  display: flex;
-  gap: var(--space-lg);
-  list-style: none;
-}
-
-.navbar-links a {
-  font-size: var(--text-sm);
-  color: var(--text-secondary);
-  font-weight: 500;
-  padding: var(--space-xs) var(--space-sm);
-  border-radius: var(--radius-sm);
-  transition: var(--transition-fast);
-}
-
-.navbar-links a:hover {
-  background: var(--bg-hover);
-  color: var(--text-primary);
-}
-
-.navbar-actions {
-  display: flex;
   gap: var(--space-sm);
 }
 
-.navbar-btn {
-  background: none;
-  border: none;
-  padding: var(--space-xs) var(--space-sm);
-  font-size: var(--text-sm);
+.nav-bubble {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  font-weight: 500;
+  font-size: 13px;
   color: var(--text-secondary);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: none;
+  border-radius: 20px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04);
+  pointer-events: auto;
   cursor: pointer;
-  border-radius: var(--radius-sm);
-  transition: var(--transition-fast);
+  transition: var(--transition-normal);
+  white-space: nowrap;
 }
 
-.navbar-btn:hover {
-  background: var(--bg-hover);
+.nav-bubble:hover {
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.06);
   color: var(--text-primary);
+  transform: scale(1.05);
+}
+
+body.dark-mode .nav-bubble {
+  background: rgba(40, 40, 40, 0.85);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+body.dark-mode .nav-bubble:hover {
+  background: rgba(50, 50, 50, 0.95);
+}
+
+.nav-bubble-active {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+.nav-bubble-active:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+body.dark-mode .nav-bubble-active {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+body.dark-mode .nav-bubble-active:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
 }
 
 /*---------------------------------------

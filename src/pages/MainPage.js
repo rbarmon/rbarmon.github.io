@@ -284,34 +284,32 @@ const techStack = [
 ];
 
 // Navbar Component
-const Navbar = ({ language, onToggleLanguage, isDarkMode, onToggleDarkMode, showBackToTop }) => (
-  <nav className="notion-navbar">
+const Navbar = ({ language, onToggleLanguage, isDarkMode, onToggleDarkMode, showNav, activeSection }) => (
+  <nav
+    className="notion-navbar"
+    style={{
+      opacity: showNav ? 1 : 0,
+      pointerEvents: showNav ? 'auto' : 'none',
+      transition: 'opacity 0.3s ease',
+    }}
+  >
     <div className="navbar-content">
-      <a
-        href="#about"
-        className="navbar-brand"
-        style={{
-          opacity: showBackToTop ? 1 : 0,
-          pointerEvents: showBackToTop ? 'auto' : 'none',
-          transition: 'opacity 0.3s ease',
-        }}
-      >
-        ↑ Top
+      <a href="#about" className="nav-bubble">↑</a>
+      <a href="#about" className={`nav-bubble ${activeSection === 'about' ? 'nav-bubble-active' : ''}`}>
+        <TranslatedText en="About" ja="紹介" />
       </a>
-      <ul className="navbar-links">
-        <li><a href="#about"><TranslatedText en="About" ja="紹介" /></a></li>
-        <li><a href="#work"><TranslatedText en="Work" ja="職歴" /></a></li>
-        {/* <li><a href="#projects"><TranslatedText en="Projects" ja="プロジェクト" /></a></li> */}
-        <li><a href="#contact"><TranslatedText en="Contact" ja="連絡" /></a></li>
-      </ul>
-      <div className="navbar-actions">
-        <button className="navbar-btn" onClick={onToggleLanguage}>
-          {language === 'en' ? 'JP' : 'EN'}
-        </button>
-        <button className="navbar-btn" onClick={onToggleDarkMode}>
-          {isDarkMode ? '☀️' : '🌙'}
-        </button>
-      </div>
+      <a href="#work" className={`nav-bubble ${activeSection === 'work' ? 'nav-bubble-active' : ''}`}>
+        <TranslatedText en="Work" ja="職歴" />
+      </a>
+      <a href="#contact" className={`nav-bubble ${activeSection === 'contact' ? 'nav-bubble-active' : ''}`}>
+        <TranslatedText en="Contact" ja="連絡" />
+      </a>
+      <button className="nav-bubble" onClick={onToggleLanguage}>
+        {language === 'en' ? 'JP' : 'EN'}
+      </button>
+      <button className="nav-bubble" onClick={onToggleDarkMode}>
+        {isDarkMode ? '☀️' : '🌙'}
+      </button>
     </div>
   </nav>
 );
@@ -469,6 +467,7 @@ function MainPage() {
   const [language, setLanguage] = useState('en');
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [showBackToTop, setShowBackToTop] = useState(false);
+  const [activeSection, setActiveSection] = useState('about');
 
   useEffect(() => {
     document.body.classList.toggle('dark-mode', isDarkMode);
@@ -478,6 +477,19 @@ function MainPage() {
     const handleScroll = () => {
       // Show back to top after scrolling past ~600px (collage height)
       setShowBackToTop(window.scrollY > 600);
+
+      // Determine active section
+      const sections = ['contact', 'work', 'about'];
+      for (const sectionId of sections) {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 200) {
+            setActiveSection(sectionId);
+            break;
+          }
+        }
+      }
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -496,10 +508,11 @@ function MainPage() {
         onToggleLanguage={toggleLanguage}
         isDarkMode={isDarkMode}
         onToggleDarkMode={toggleDarkMode}
-        showBackToTop={showBackToTop}
+        showNav={showBackToTop}
+        activeSection={activeSection}
       />
 
-      <main style={{ paddingTop: '40px' }}>
+      <main style={{ paddingTop: 0 }}>
         {/* Hero - Draggable Collage */}
         <section id="about">
           <DraggableCollage name={heroName} jobTitle={heroTitle} />
