@@ -84,7 +84,7 @@ const collageItems = [
   },
 ];
 
-const CollageItem = ({ item, calculatedPosition, onDragStart, onDragStop }) => {
+const CollageItem = ({ item, calculatedPosition, scale = 1, onDragStart, onDragStop }) => {
   const nodeRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [hasDragged, setHasDragged] = useState(false);
@@ -116,7 +116,8 @@ const CollageItem = ({ item, calculatedPosition, onDragStart, onDragStop }) => {
   const baseStyle = {
     position: 'absolute',
     cursor: 'grab',
-    transform: `rotate(${item.rotation}deg)`,
+    transform: `rotate(${item.rotation}deg) scale(${scale})`,
+    transformOrigin: 'top left',
     transition: isDragging ? 'none' : 'box-shadow 0.2s ease, transform 0.2s ease',
     zIndex: zIndex,
     userSelect: 'none',
@@ -821,6 +822,18 @@ const DraggableCollage = ({ name, jobTitle }) => {
     return { x, y };
   };
 
+  // Calculate scale factor based on screen width
+  // 14" laptop (~1400-1512px) = 1.0, 16" laptop (~1728px+) = slightly larger
+  const getScale = () => {
+    const width = containerSize.width;
+    if (width <= 1400) return 1;
+    if (width >= 1800) return 1.15;
+    // Linear interpolation between 1400 and 1800
+    return 1 + ((width - 1400) / 400) * 0.15;
+  };
+
+  const itemScale = getScale();
+
   // Render mobile carousel on small screens
   if (isMobile) {
     return <MobileCarousel items={collageItems} name={name} jobTitle={jobTitle} />;
@@ -860,6 +873,7 @@ const DraggableCollage = ({ name, jobTitle }) => {
             key={`${item.id}-${Math.round(containerSize.width)}`}
             item={item}
             calculatedPosition={calculatePosition(item)}
+            scale={itemScale}
           />
         ))}
 
