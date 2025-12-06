@@ -314,6 +314,7 @@ const Navbar = ({ language, onToggleLanguage, isDarkMode, onToggleDarkMode, show
     { type: 'link', href: '#about', label: '↑', isTop: true },
     { type: 'link', href: '#about', labelEn: 'About', labelJa: '紹介', section: 'about' },
     { type: 'link', href: '#work', labelEn: 'Work', labelJa: '職歴', section: 'work' },
+    { type: 'link', href: '#tech', labelEn: 'Tech', labelJa: '技術', section: 'tech' },
     { type: 'link', href: '#contact', labelEn: 'Contact', labelJa: '連絡', section: 'contact' },
   ];
 
@@ -341,6 +342,9 @@ const Navbar = ({ language, onToggleLanguage, isDarkMode, onToggleDarkMode, show
           </a>
           <a href="#work" className={`mobile-nav-item ${activeSection === 'work' ? 'active' : ''}`} onClick={handleNavClick}>
             <TranslatedText en="Work" ja="職歴" />
+          </a>
+          <a href="#tech" className={`mobile-nav-item ${activeSection === 'tech' ? 'active' : ''}`} onClick={handleNavClick}>
+            <TranslatedText en="Tech" ja="技術" />
           </a>
           <a href="#contact" className={`mobile-nav-item ${activeSection === 'contact' ? 'active' : ''}`} onClick={handleNavClick}>
             <TranslatedText en="Contact" ja="連絡" />
@@ -563,7 +567,7 @@ function MainPage() {
       setShowBackToTop(window.scrollY > 600);
 
       // Determine active section
-      const sections = ['contact', 'work', 'about'];
+      const sections = ['contact', 'tech', 'work', 'about'];
       for (const sectionId of sections) {
         const element = document.getElementById(sectionId);
         if (element) {
@@ -697,7 +701,7 @@ function MainPage() {
         <div className="container"><div className="divider" /></div>
 
         {/* Tech Stack */}
-        <section className="section">
+        <section className="section" id="tech">
           <div className="container">
             <h2 className="section-heading">
               <TranslatedText en="Tech Stack" ja="技術スタック" />
