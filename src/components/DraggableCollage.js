@@ -812,7 +812,13 @@ const DraggableCollage = ({ name, jobTitle }) => {
     // Use 70% of the extra height to allow some spread but not full spread
     const effectiveHeight = aspectLockedHeight + (containerSize.height - aspectLockedHeight) * 0.7;
     const yOffset = (containerSize.height - effectiveHeight) / 2;
-    const y = yOffset + (positionPercent.y * effectiveHeight);
+    let y = yOffset + (positionPercent.y * effectiveHeight);
+
+    // On larger screens (16"+), push top elements down a bit more
+    if (containerSize.width > 1400 && positionPercent.y < 0.3) {
+      const extraOffset = ((containerSize.width - 1400) / 400) * 40; // up to 40px extra on 1800px+
+      y += extraOffset;
+    }
 
     // If centerX is true, center the element by subtracting half its width
     if (centerX && elementWidth) {
@@ -823,13 +829,13 @@ const DraggableCollage = ({ name, jobTitle }) => {
   };
 
   // Calculate scale factor based on screen width
-  // 14" laptop (~1400-1512px) = 1.0, 16" laptop (~1728px+) = slightly larger
+  // 14" laptop (~1400-1512px) = 1.0, 16" laptop (~1728px+) = larger
   const getScale = () => {
     const width = containerSize.width;
     if (width <= 1400) return 1;
-    if (width >= 1800) return 1.15;
+    if (width >= 1800) return 1.25;
     // Linear interpolation between 1400 and 1800
-    return 1 + ((width - 1400) / 400) * 0.15;
+    return 1 + ((width - 1400) / 400) * 0.25;
   };
 
   const itemScale = getScale();
