@@ -1,6 +1,11 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Draggable from 'react-draggable';
 
+// Reference dimensions the original layout was designed for
+const REFERENCE_WIDTH = 1400;
+const REFERENCE_HEIGHT = 700;
+
+// Positions as percentages of reference dimensions
 const collageItems = [
   {
     id: 'monash-badge',
@@ -9,7 +14,8 @@ const collageItems = [
     degree: 'B.S. Computer Science',
     logo: '/images/collage/monash-logo.svg',
     link: 'https://www.monash.edu/study/courses/find-a-course/computer-science-c2001',
-    initialPosition: { x: 190, y: 130 },
+    // x: 180/1400 = 0.129, y: 90/700 = 0.129 (shifted up 20px more)
+    positionPercent: { x: 0.129, y: 0.129 },
     rotation: -3,
     zIndex: 10,
   },
@@ -18,7 +24,11 @@ const collageItems = [
     type: 'image',
     src: '/images/profile/big/profile1.png',
     alt: 'Rian Kawahara',
-    initialPosition: { x: 660, y: 90 },
+    // centered horizontally with slight offset to right
+    positionPercent: { x: 0.5, y: 0.1 },
+    centerX: true,
+    centerOffset: 15,
+    elementWidth: 216,
     size: { width: 200, height: 'auto' },
     rotation: 2,
     zIndex: 15,
@@ -30,7 +40,8 @@ const collageItems = [
     title: 'Tokyo Open Data Hackathon',
     subtitle: 'Business Award 2024',
     link: 'https://www.openbadge-global.com/ns/portal/openbadge/public/assertions/detail/MTd5VzlKSHE1ZkxrQ0lNY0xpTjdsQT09',
-    initialPosition: { x: 1040, y: 470 },
+    // x: 950/1400 = 0.679
+    positionPercent: { x: 0.679, y: 0.614 },
     rotation: 4,
     zIndex: 14,
   },
@@ -42,7 +53,8 @@ const collageItems = [
     title: 'Featured in Diamondhead',
     subtitle: 'Intern Article',
     link: 'https://note.com/diamondhead/n/n4a1f53c731f4',
-    initialPosition: { x: 190, y: 430 },
+    // x: 180/1400 = 0.129, y: 390/700 = 0.557 (shifted up 20px more)
+    positionPercent: { x: 0.129, y: 0.557 },
     rotation: -4,
     zIndex: 9,
   },
@@ -53,7 +65,8 @@ const collageItems = [
     company: 'Little Help Agency',
     role: 'Software Engineer',
     link: 'https://www.littlehelp.co.jp/',
-    initialPosition: { x: 1080, y: 190 },
+    // x: 990/1400 = 0.707
+    positionPercent: { x: 0.707, y: 0.214 },
     rotation: 3,
     zIndex: 11,
   },
@@ -61,13 +74,16 @@ const collageItems = [
     id: 'location',
     type: 'location-tag',
     text: 'Tokyo, Japan',
-    initialPosition: { x: 700, y: 490 },
+    // centered horizontally, moved up
+    positionPercent: { x: 0.5, y: 0.6 },
+    centerX: true,
+    elementWidth: 130,
     rotation: 0,
     zIndex: 10,
   },
 ];
 
-const CollageItem = ({ item, onDragStart, onDragStop }) => {
+const CollageItem = ({ item, calculatedPosition, onDragStart, onDragStop }) => {
   const nodeRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
   const [hasDragged, setHasDragged] = useState(false);
@@ -438,7 +454,7 @@ const CollageItem = ({ item, onDragStart, onDragStop }) => {
   return (
     <Draggable
       nodeRef={nodeRef}
-      defaultPosition={item.initialPosition}
+      defaultPosition={calculatedPosition}
       onStart={handleStart}
       onDrag={handleDrag}
       onStop={handleStop}
@@ -453,6 +469,37 @@ const CollageItem = ({ item, onDragStart, onDragStop }) => {
 
 const DraggableCollage = ({ name, jobTitle }) => {
   const containerRef = useRef(null);
+  const [containerSize, setContainerSize] = useState({ width: REFERENCE_WIDTH, height: REFERENCE_HEIGHT });
+
+  useEffect(() => {
+    const updateSize = () => {
+      if (containerRef.current) {
+        const { width, height } = containerRef.current.getBoundingClientRect();
+        setContainerSize({ width, height });
+      }
+    };
+
+    // Initial size
+    updateSize();
+
+    // Update on resize
+    window.addEventListener('resize', updateSize);
+    return () => window.removeEventListener('resize', updateSize);
+  }, []);
+
+  // Calculate actual pixel positions based on container size
+  const calculatePosition = (item) => {
+    const { positionPercent, centerX, elementWidth, centerOffset = 0 } = item;
+    let x = positionPercent.x * containerSize.width;
+    const y = positionPercent.y * containerSize.height;
+
+    // If centerX is true, center the element by subtracting half its width
+    if (centerX && elementWidth) {
+      x = (containerSize.width / 2) - (elementWidth / 2) + centerOffset;
+    }
+
+    return { x, y };
+  };
 
   return (
     <div className="collage-hero">
@@ -483,7 +530,11 @@ const DraggableCollage = ({ name, jobTitle }) => {
         </div>
 
         {collageItems.map((item) => (
-          <CollageItem key={item.id} item={item} />
+          <CollageItem
+            key={`${item.id}-${Math.round(containerSize.width)}`}
+            item={item}
+            calculatedPosition={calculatePosition(item)}
+          />
         ))}
 
         <div className="collage-hint">
