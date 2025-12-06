@@ -187,7 +187,6 @@ a:hover {
 .collage-hero {
   padding: 0;
   height: 100vh;
-  max-height: 900px;
   display: flex;
   flex-direction: column;
 }
