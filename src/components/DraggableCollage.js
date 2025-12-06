@@ -826,6 +826,14 @@ const DraggableCollage = ({ name, jobTitle }) => {
       }
     }
 
+    // On really tall screens, push top elements down more
+    const aspectRatio = containerSize.width / containerSize.height;
+    if (aspectRatio < 1.5 && positionPercent.y < 0.3) {
+      // Screen is taller than normal (aspect ratio < 1.5)
+      const tallFactor = Math.max(0, (1.5 - aspectRatio) / 0.5); // 0 to 1 for aspect 1.5 to 1.0
+      y += tallFactor * 60; // up to 60px extra down on tall screens
+    }
+
     // If centerX is true, center the element by subtracting half its width
     if (centerX && elementWidth) {
       x = (containerSize.width / 2) - (elementWidth / 2) + centerOffset;
