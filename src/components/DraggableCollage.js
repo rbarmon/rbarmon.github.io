@@ -7,7 +7,9 @@ const collageItems = [
     type: 'university-badge',
     university: 'Monash University',
     degree: 'B.S. Computer Science',
-    initialPosition: { x: 200, y: 60 },
+    logo: '/images/collage/monash-logo.svg',
+    link: 'https://www.monash.edu/study/courses/find-a-course/computer-science-c2001',
+    initialPosition: { x: 190, y: 80 },
     rotation: -3,
     zIndex: 10,
   },
@@ -16,72 +18,50 @@ const collageItems = [
     type: 'image',
     src: '/images/profile/big/profile1.png',
     alt: 'Rian Kawahara',
-    initialPosition: { x: 650, y: 40 },
+    initialPosition: { x: 660, y: 60 },
     size: { width: 200, height: 'auto' },
     rotation: 2,
     zIndex: 15,
   },
   {
-    id: 'tech-react',
-    type: 'tech-badge',
-    icon: 'devicon-react-original',
-    label: 'React',
-    initialPosition: { x: 220, y: 680 },
-    rotation: 5,
-    zIndex: 12,
-  },
-  {
-    id: 'tech-typescript',
-    type: 'tech-badge',
-    icon: 'devicon-typescript-plain',
-    label: 'TypeScript',
-    initialPosition: { x: 200, y: 480 },
-    rotation: -4,
-    zIndex: 11,
-  },
-  {
-    id: 'tech-python',
-    type: 'tech-badge',
-    icon: 'devicon-python-plain',
-    label: 'Python',
-    initialPosition: { x: 1190, y: 680 },
-    rotation: 3,
-    zIndex: 13,
-  },
-  {
-    id: 'tech-kotlin',
-    type: 'tech-badge',
-    icon: 'devicon-kotlin-plain',
-    label: 'Kotlin',
-    initialPosition: { x: 1140, y: 80 },
-    rotation: -2,
-    zIndex: 11,
-  },
-  {
     id: 'hackathon-badge',
     type: 'achievement',
-    title: 'Tokyo Hackathon',
+    image: '/images/collage/hackathon-badge.png',
+    title: 'Tokyo Open Data Hackathon',
     subtitle: 'Business Award 2024',
-    initialPosition: { x: 1160, y: 320 },
+    link: 'https://www.openbadge-global.com/ns/portal/openbadge/public/assertions/detail/MTd5VzlKSHE1ZkxrQ0lNY0xpTjdsQT09',
+    initialPosition: { x: 1040, y: 420 },
     rotation: 4,
     zIndex: 14,
   },
   {
     id: 'article-card',
     type: 'article-card',
-    image: '/images/collage/diamondhead-article.png',
+    image: '/images/collage/diamondhead-article.webp',
+    logo: '/images/collage/diamondhead-logo.jpeg',
     title: 'Featured in Diamondhead',
     subtitle: 'Intern Article',
     link: 'https://note.com/diamondhead/n/n4a1f53c731f4',
-    initialPosition: { x: 190, y: 240 },
+    initialPosition: { x: 190, y: 380 },
     rotation: -4,
     zIndex: 9,
+  },
+  {
+    id: 'littlehelp-badge',
+    type: 'company-badge',
+    logo: '/images/collage/littlehelp-logo.jpeg',
+    company: 'Little Help Agency',
+    role: 'Software Engineer',
+    link: 'https://www.littlehelp.co.jp/',
+    initialPosition: { x: 1080, y: 140 },
+    rotation: 3,
+    zIndex: 11,
   },
   {
     id: 'location',
     type: 'location-tag',
     text: 'Tokyo, Japan',
-    initialPosition: { x: 720, y: 680 },
+    initialPosition: { x: 700, y: 460 },
     rotation: 0,
     zIndex: 10,
   },
@@ -188,30 +168,43 @@ const CollageItem = ({ item, onDragStart, onDragStop }) => {
           <div
             style={{
               ...baseStyle,
-              background: 'linear-gradient(135deg, #FFD700, #FFA500)',
-              padding: '16px 24px',
+              background: '#fff',
+              padding: '16px',
               boxShadow: isDragging
                 ? '0 20px 40px rgba(0,0,0,0.3)'
                 : '0 4px 12px rgba(0,0,0,0.15)',
               borderRadius: '12px',
-              textAlign: 'center',
+              width: '200px',
             }}
           >
+            {item.image && (
+              <img
+                src={item.image}
+                alt={item.title}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  marginBottom: '14px',
+                  pointerEvents: 'none',
+                }}
+                draggable={false}
+              />
+            )}
             <div style={{
-              fontSize: '14px',
+              fontSize: '16px',
               fontWeight: 600,
-              color: '#1a1a1a',
+              color: '#37352F',
               fontFamily: 'Inter, sans-serif',
+              marginBottom: '4px',
             }}>
               {item.title}
             </div>
             <div style={{
-              fontSize: '12px',
-              color: '#333',
-              marginTop: '4px',
+              fontSize: '13px',
+              color: '#787774',
               fontFamily: 'Inter, sans-serif',
             }}>
-              {item.subtitle}
+              {item.subtitle} →
             </div>
           </div>
         );
@@ -278,38 +271,49 @@ const CollageItem = ({ item, onDragStart, onDragStop }) => {
             style={{
               ...baseStyle,
               background: '#fff',
-              padding: '20px 24px',
+              padding: '16px',
               boxShadow: isDragging
                 ? '0 20px 40px rgba(0,0,0,0.3)'
                 : '0 4px 12px rgba(0,0,0,0.15)',
               borderRadius: '12px',
-              border: '2px solid #003C6C',
+              width: '280px',
               fontFamily: 'Inter, sans-serif',
             }}
           >
+            {item.logo && (
+              <div style={{
+                background: '#003C6C',
+                padding: '20px',
+                borderRadius: '8px',
+                marginBottom: '14px',
+                display: 'flex',
+                justifyContent: 'center',
+              }}>
+                <img
+                  src={item.logo}
+                  alt={item.university}
+                  style={{
+                    height: '50px',
+                    pointerEvents: 'none',
+                    filter: 'brightness(0) invert(1)',
+                  }}
+                  draggable={false}
+                />
+              </div>
+            )}
             <div style={{
-              fontSize: '11px',
-              fontWeight: 600,
-              color: '#003C6C',
-              letterSpacing: '0.05em',
-              textTransform: 'uppercase',
-              marginBottom: '4px',
-            }}>
-              🎓 Education
-            </div>
-            <div style={{
-              fontSize: '16px',
+              fontSize: '18px',
               fontWeight: 700,
-              color: '#003C6C',
-              marginBottom: '4px',
-            }}>
-              {item.university}
-            </div>
-            <div style={{
-              fontSize: '13px',
-              color: '#666',
+              color: '#37352F',
+              marginBottom: '6px',
             }}>
               {item.degree}
+            </div>
+            <div style={{
+              fontSize: '14px',
+              color: '#787774',
+            }}>
+              {item.university} →
             </div>
           </div>
         );
@@ -320,12 +324,12 @@ const CollageItem = ({ item, onDragStart, onDragStop }) => {
             style={{
               ...baseStyle,
               background: '#fff',
-              padding: '12px',
+              padding: '16px',
               boxShadow: isDragging
                 ? '0 20px 40px rgba(0,0,0,0.3)'
                 : '0 4px 12px rgba(0,0,0,0.15)',
-              borderRadius: '10px',
-              width: '240px',
+              borderRadius: '12px',
+              width: '320px',
             }}
           >
             <img
@@ -333,29 +337,95 @@ const CollageItem = ({ item, onDragStart, onDragStop }) => {
               alt={item.title}
               style={{
                 width: '100%',
-                height: '140px',
+                height: '200px',
                 objectFit: 'cover',
-                borderRadius: '6px',
-                marginBottom: '10px',
+                borderRadius: '8px',
+                marginBottom: '14px',
                 pointerEvents: 'none',
               }}
               draggable={false}
             />
-            <div style={{
-              fontSize: '14px',
-              fontWeight: 600,
-              color: '#37352F',
-              fontFamily: 'Inter, sans-serif',
-              marginBottom: '4px',
-            }}>
-              {item.title}
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
+              {item.logo && (
+                <img
+                  src={item.logo}
+                  alt=""
+                  style={{
+                    width: '28px',
+                    height: '28px',
+                    objectFit: 'contain',
+                    borderRadius: '4px',
+                    pointerEvents: 'none',
+                  }}
+                  draggable={false}
+                />
+              )}
+              <div style={{
+                fontSize: '18px',
+                fontWeight: 600,
+                color: '#37352F',
+                fontFamily: 'Inter, sans-serif',
+              }}>
+                {item.title}
+              </div>
             </div>
             <div style={{
-              fontSize: '12px',
+              fontSize: '14px',
               color: '#787774',
               fontFamily: 'Inter, sans-serif',
             }}>
               {item.subtitle} →
+            </div>
+          </div>
+        );
+
+      case 'company-badge':
+        return (
+          <div
+            style={{
+              ...baseStyle,
+              background: '#fff',
+              padding: '14px 24px',
+              boxShadow: isDragging
+                ? '0 20px 40px rgba(0,0,0,0.3)'
+                : '0 4px 12px rgba(0,0,0,0.1)',
+              borderRadius: '12px',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '14px',
+              border: '1px solid #E5E5E5',
+              minWidth: '260px',
+            }}
+          >
+            <img
+              src={item.logo}
+              alt={item.company}
+              style={{
+                width: '44px',
+                height: '44px',
+                objectFit: 'contain',
+                borderRadius: '8px',
+                pointerEvents: 'none',
+              }}
+              draggable={false}
+            />
+            <div>
+              <div style={{
+                fontSize: '15px',
+                fontWeight: 600,
+                color: '#37352F',
+                fontFamily: 'Inter, sans-serif',
+                marginBottom: '2px',
+              }}>
+                {item.company}
+              </div>
+              <div style={{
+                fontSize: '13px',
+                color: '#787774',
+                fontFamily: 'Inter, sans-serif',
+              }}>
+                {item.role} →
+              </div>
             </div>
           </div>
         );

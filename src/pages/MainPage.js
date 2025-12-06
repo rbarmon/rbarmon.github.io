@@ -16,49 +16,210 @@ const TranslatedText = ({ en, ja, as: Component = 'span', className = '', ...res
   );
 };
 
+// Tooltip component for tech stack icons
+const TechIcon = ({ icon, name }) => {
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  return (
+    <span
+      className="tag"
+      style={{ padding: '4px 8px', cursor: 'default', position: 'relative' }}
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
+    >
+      <i className={icon} style={{ fontSize: '16px' }}></i>
+      {showTooltip && (
+        <span
+          style={{
+            position: 'absolute',
+            bottom: '100%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            marginBottom: '6px',
+            padding: '4px 8px',
+            background: 'var(--text-primary)',
+            color: 'var(--bg-primary)',
+            fontSize: '11px',
+            fontWeight: 500,
+            borderRadius: '4px',
+            whiteSpace: 'nowrap',
+            zIndex: 100,
+            pointerEvents: 'none',
+          }}
+        >
+          {name}
+        </span>
+      )}
+    </span>
+  );
+};
+
+// Tooltip component for platform icons
+const PlatformIcon = ({ icon, name }) => {
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  return (
+    <span
+      className="tag tag-blue"
+      style={{ padding: '4px 8px', cursor: 'default', position: 'relative' }}
+      onMouseEnter={() => setShowTooltip(true)}
+      onMouseLeave={() => setShowTooltip(false)}
+    >
+      <img
+        src={icon}
+        alt={name}
+        style={{ height: '16px', width: 'auto', maxWidth: '50px', objectFit: 'contain' }}
+      />
+      {showTooltip && (
+        <span
+          style={{
+            position: 'absolute',
+            bottom: '100%',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            marginBottom: '6px',
+            padding: '4px 8px',
+            background: 'var(--text-primary)',
+            color: 'var(--bg-primary)',
+            fontSize: '11px',
+            fontWeight: 500,
+            borderRadius: '4px',
+            whiteSpace: 'nowrap',
+            zIndex: 100,
+            pointerEvents: 'none',
+          }}
+        >
+          {name}
+        </span>
+      )}
+    </span>
+  );
+};
+
 // Work Experience Data
 const workExperience = [
   {
     id: 'little-help-se',
+    logo: '/images/collage/littlehelp-logo.jpeg',
+    companyUrl: 'https://www.littlehelp.co.jp/',
     date: { en: 'Apr 2025 – Present', ja: '2025年4月～現在' },
     title: { en: 'Software Engineer / Solution Engineer', ja: 'ソフトウェアエンジニア / ソリューションエンジニア' },
     company: { en: 'Little Help Agency LLC', ja: 'Little Help Agency LLC' },
     description: {
-      en: 'Full-stack development on LINE integration software and Little Help Connect SaaS. Design and deliver integration workflows while partnering with international clients.',
-      ja: 'LINE連携ソフトウェアおよびLittle Help Connect SaaSでフルスタック開発。海外クライアントと連携しながら統合ワークフローを設計・提供。',
+      en: 'Full-stack development on Little Help Connect SaaS integrating LINE and HubSpot. Also core engineer for Lumo.cx, a new LINE × Shopify integration product.',
+      ja: 'LINEとHubSpotを統合するLittle Help Connect SaaSでフルスタック開発。また、LINE × Shopify連携の新製品Lumo.cxのコアエンジニア。',
     },
     highlights: [
-      { en: 'Full-stack feature development with LINE and HubSpot integration', ja: 'LINEとHubSpot連携のフルスタック機能開発' },
-      { en: 'Designed group chat management syncing LINE groups as HubSpot objects', ja: 'LINEグループをHubSpotオブジェクトとして同期するグループチャット管理を設計' },
-      { en: 'Bilingual bridge for international customers', ja: '海外顧客との橋渡しを担当' },
+      { en: 'Designed LINE Groups → HubSpot Company sync feature, adopted by 10+ clients', ja: 'LINEグループ→HubSpot会社同期機能を設計、10社以上のクライアントが採用' },
+      { en: 'Core engineer for Lumo.cx: UI architecture and major features with React/Next.js', ja: 'Lumo.cxコアエンジニア：React/Next.jsでUIアーキテクチャと主要機能を担当' },
+      { en: 'Technical representative in 3 business meetings with major US B2C SaaS provider', ja: '米国大手B2C SaaSプロバイダーとの3回のビジネスミーティングで技術代表を担当' },
+      { en: 'Technical support for HubSpot Solutions Partner implementation in Taiwan', ja: '台湾のHubSpot Solutions Partnerの実装プロジェクトで技術サポート' },
+      { en: 'Resolved 10+ cross-team technical questions, accelerating customer onboarding', ja: '10件以上のクロスチーム技術課題を解決し、顧客オンボーディングを加速' },
+    ],
+    techStack: [
+      { icon: 'devicon-react-original', name: 'React' },
+      { icon: 'devicon-nextjs-plain', name: 'Next.js' },
+      { icon: 'devicon-kotlin-plain', name: 'Kotlin' },
+      { icon: 'devicon-nodejs-plain', name: 'Node.js' },
+      { icon: 'devicon-postgresql-plain', name: 'PostgreSQL' },
+      { icon: 'devicon-googlecloud-plain', name: 'GCP' },
+    ],
+    platforms: [
+      { name: 'LINE', icon: 'https://upload.wikimedia.org/wikipedia/commons/4/41/LINE_logo.svg' },
+      { name: 'HubSpot', icon: 'https://www.vectorlogo.zone/logos/hubspot/hubspot-icon.svg' },
+      { name: 'Shopify', icon: 'https://cdn.worldvectorlogo.com/logos/shopify.svg' },
+    ],
+  },
+  {
+    id: 'little-help-intern',
+    logo: '/images/collage/littlehelp-logo.jpeg',
+    companyUrl: 'https://www.littlehelp.co.jp/',
+    date: { en: 'Mar 2025 – Apr 2025', ja: '2025年3月～2025年4月' },
+    title: { en: 'Software Engineer Intern', ja: 'ソフトウェアエンジニアインターン' },
+    company: { en: 'Little Help Agency LLC', ja: 'Little Help Agency LLC' },
+    description: {
+      en: 'Worked on a proof-of-concept application exploring upsell timing based on user sign-ups and early interaction signals. Integrated with HubSpot for contact management.',
+      ja: 'ユーザー登録と初期のインタラクションシグナルに基づくアップセルタイミングを探るPoCアプリケーションを開発。HubSpotとコンタクト管理で連携。',
+    },
+    highlights: [
+      { en: 'Implemented HubSpot contact creation/updates based on user sign-ups and profile changes', ja: 'ユーザー登録とプロフィール変更に基づくHubSpotコンタクトの作成・更新を実装' },
+      { en: 'Developed flows to capture early user activity for upsell timing models', ja: 'アップセルタイミングモデル用の初期ユーザーアクティビティ取得フローを開発' },
+      { en: 'Built React components for displaying user information and interaction events', ja: 'ユーザー情報とインタラクションイベント表示用のReactコンポーネントを構築' },
+      { en: 'Implemented Kotlin services with PostgreSQL for persistence and HubSpot sync', ja: 'PostgreSQLとHubSpot同期のためのKotlinサービスを実装' },
+      { en: 'Participated in design discussions to validate upsell concept feasibility', ja: 'アップセルコンセプトの実現可能性を検証する設計議論に参加' },
+    ],
+    techStack: [
+      { icon: 'devicon-react-original', name: 'React' },
+      { icon: 'devicon-kotlin-plain', name: 'Kotlin' },
+      { icon: 'devicon-postgresql-plain', name: 'PostgreSQL' },
+    ],
+    platforms: [
+      { name: 'HubSpot', icon: 'https://www.vectorlogo.zone/logos/hubspot/hubspot-icon.svg' },
     ],
   },
   {
     id: 'mejora',
+    logo: '/images/collage/mejora-logo.png',
+    companyUrl: 'https://mejora.co.jp/',
     date: { en: 'Apr 2024 – Aug 2024', ja: '2024年4月～2024年8月' },
     title: { en: 'Software Engineer Intern', ja: 'ソフトウェアエンジニアインターン' },
     company: { en: 'MEJORA Corporation', ja: 'MEJORA株式会社' },
     description: {
-      en: 'Worked directly under the CEO in a flat structure. Responsible for developing AI-powered applications using React, Firebase, and OpenAI API.',
-      ja: 'CEOの直接指導の下、フラットな組織構造で働く。React、Firebase、OpenAI APIを使用したAIアプリケーション開発を担当。',
+      en: 'Worked directly under the CEO in a 4-person engineering team with a flat organizational structure. Contributed to product direction, technical research, and feature implementation for AI-driven applications.',
+      ja: '4人のエンジニアリングチームでCEOの直接指導の下、フラットな組織構造で働く。AI駆動アプリケーションの製品方針、技術調査、機能実装に貢献。',
     },
     highlights: [
-      { en: 'Led implementation of AI survey creation app', ja: 'AIアンケート作成アプリの実装を主導' },
-      { en: 'Conducted market research using Selenium and Hugging Face', ja: 'SeleniumとHugging Faceを使用して市場調査を実施' },
+      { en: 'Led implementation of AI-powered survey creation app using OpenAI API', ja: 'OpenAI APIを使用したAIアンケート作成アプリの実装を主導' },
+      { en: 'Proposed product directions based on technical evaluations and data analysis', ja: '技術評価とデータ分析に基づく製品方針を提案' },
+      { en: 'Conducted market research using Selenium and Hugging Face models', ja: 'SeleniumとHugging Faceモデルを使用して市場調査を実施' },
+      { en: 'Analyzed datasets with Python/pandas to support product decisions', ja: 'Python/pandasでデータセットを分析し、製品意思決定を支援' },
+      { en: 'Created UI/UX mockups in Figma for stakeholder demos', ja: 'ステークホルダーデモ用のUI/UXモックアップをFigmaで作成' },
+    ],
+    techStack: [
+      { icon: 'devicon-react-original', name: 'React' },
+      { icon: 'devicon-firebase-plain', name: 'Firebase' },
+      { icon: 'devicon-python-plain', name: 'Python' },
+      { icon: 'devicon-figma-plain', name: 'Figma' },
+    ],
+    platforms: [
+      { name: 'OpenAI', icon: 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg' },
+      { name: 'Hugging Face', icon: 'https://huggingface.co/front/assets/huggingface_logo-noborder.svg' },
     ],
   },
   {
     id: 'diamondhead',
+    logo: '/images/collage/diamondhead-logo.jpeg',
+    companyUrl: 'https://diamondhead.jp/',
     date: { en: 'Dec 2023 – Feb 2024', ja: '2023年12月～2024年2月' },
     title: { en: 'Software Engineer Intern', ja: 'ソフトウェアエンジニアインターン' },
     company: { en: 'Diamondhead Corporation', ja: 'ダイヤモンドヘッド株式会社' },
     description: {
-      en: 'Feature improvement team for centralized e-commerce management SaaS. Tech stack: Django, PostgreSQL, JavaScript.',
-      ja: '集中型EC管理SaaSの機能改善チーム。技術スタック：Django、PostgreSQL、JavaScript。',
+      en: 'Feature Improvement Team (10 members) for a centralized e-commerce management SaaS used to manage product listings across multiple platforms (Amazon, ZOZOTOWN, etc.).',
+      ja: '複数のプラットフォーム（Amazon、ZOZOTOWNなど）での商品掲載を管理する集中型EC管理SaaSの機能改善チーム（10名）に所属。',
     },
+    highlights: [
+      { en: 'Enhanced word-count feature to support two input modes with improved accuracy', ja: '2つの入力モードに対応した文字数カウント機能を改善し、精度を向上' },
+      { en: 'Updated user account modification flow to reflect changes instantly', ja: 'ユーザーアカウント変更フローを更新し、変更を即時反映' },
+      { en: 'Redesigned product image positioning settings with configurable options', ja: '商品画像配置設定を再設計し、設定可能なオプションを追加' },
+      { en: 'Wrote test specifications and reviewed teammates\' code before release', ja: 'テスト仕様書を作成し、リリース前にチームメイトのコードをレビュー' },
+    ],
+    techStack: [
+      { icon: 'devicon-django-plain', name: 'Django' },
+      { icon: 'devicon-postgresql-plain', name: 'PostgreSQL' },
+      { icon: 'devicon-javascript-plain', name: 'JavaScript' },
+      { icon: 'devicon-html5-plain', name: 'HTML5' },
+      { icon: 'devicon-css3-plain', name: 'CSS3' },
+    ],
+    platforms: [
+      { name: 'Amazon', icon: 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg' },
+      { name: 'ZOZOTOWN', icon: '/images/collage/zozotown-logo.svg' },
+    ],
     link: {
       href: 'https://note.com/diamondhead/n/n4a1f53c731f4',
       label: { en: 'Internship Article', ja: 'インターン記事' },
+      image: '/images/collage/diamondhead-article.webp',
+      title: { en: 'Monash University | Improving Product Information Management System in Sapporo | Long-term Internship Interview', ja: 'モナッシュ大学｜初めての札幌で商品情報管理システムの改善｜札幌の長期インターンシップインタビュー' },
+      source: 'Diamondhead Engineer Careers',
     },
   },
 ];
@@ -130,7 +291,7 @@ const Navbar = ({ language, onToggleLanguage, isDarkMode, onToggleDarkMode }) =>
       <ul className="navbar-links">
         <li><a href="#about"><TranslatedText en="About" ja="紹介" /></a></li>
         <li><a href="#work"><TranslatedText en="Work" ja="職歴" /></a></li>
-        <li><a href="#projects"><TranslatedText en="Projects" ja="プロジェクト" /></a></li>
+        {/* <li><a href="#projects"><TranslatedText en="Projects" ja="プロジェクト" /></a></li> */}
         <li><a href="#contact"><TranslatedText en="Contact" ja="連絡" /></a></li>
       </ul>
       <div className="navbar-actions">
@@ -148,31 +309,124 @@ const Navbar = ({ language, onToggleLanguage, isDarkMode, onToggleDarkMode }) =>
 // Timeline Item Component
 const TimelineItem = ({ item }) => {
   const { language } = useLanguage();
+
+  const logoElement = item.logo && (
+    <img
+      src={item.logo}
+      alt={item.company.en}
+      style={{
+        width: '48px',
+        height: '48px',
+        objectFit: 'contain',
+        borderRadius: 'var(--radius-sm)',
+        border: '1px solid var(--border-light)',
+        flexShrink: 0,
+      }}
+    />
+  );
+
   return (
     <div className="notion-timeline-item">
-      <div className="notion-timeline-date">
-        <TranslatedText en={item.date.en} ja={item.date.ja} />
-      </div>
-      <h4 className="notion-timeline-title">
-        <TranslatedText en={item.title.en} ja={item.title.ja} />
-      </h4>
-      <p style={{ color: 'var(--text-muted)', fontSize: 'var(--text-sm)', marginBottom: 'var(--space-sm)' }}>
-        <TranslatedText en={item.company.en} ja={item.company.ja} />
-      </p>
-      <div className="notion-timeline-content">
-        <p><TranslatedText en={item.description.en} ja={item.description.ja} /></p>
-        {item.highlights && (
-          <ul>
-            {item.highlights.map((h, i) => (
-              <li key={i}><TranslatedText en={h.en} ja={h.ja} /></li>
-            ))}
-          </ul>
-        )}
-        {item.link && (
-          <a href={item.link.href} target="_blank" rel="noreferrer" className="btn btn-ghost" style={{ marginTop: 'var(--space-sm)' }}>
-            <TranslatedText en={item.link.label.en} ja={item.link.label.ja} /> →
+      <div style={{ display: 'flex', alignItems: 'flex-start', gap: 'var(--space-md)' }}>
+        {item.companyUrl ? (
+          <a href={item.companyUrl} target="_blank" rel="noreferrer" style={{ flexShrink: 0 }}>
+            {logoElement}
           </a>
-        )}
+        ) : logoElement}
+        <div style={{ flex: 1 }}>
+          <div className="notion-timeline-date">
+            <TranslatedText en={item.date.en} ja={item.date.ja} />
+          </div>
+          <h4 className="notion-timeline-title">
+            <TranslatedText en={item.title.en} ja={item.title.ja} />
+          </h4>
+          <p style={{ color: 'var(--text-muted)', fontSize: 'var(--text-sm)', marginBottom: 'var(--space-sm)' }}>
+            <TranslatedText en={item.company.en} ja={item.company.ja} />
+          </p>
+          <div className="notion-timeline-content">
+            <p><TranslatedText en={item.description.en} ja={item.description.ja} /></p>
+            {item.highlights && (
+              <ul>
+                {item.highlights.map((h, i) => (
+                  <li key={i}><TranslatedText en={h.en} ja={h.ja} /></li>
+                ))}
+              </ul>
+            )}
+            {(item.techStack || item.platforms) && (
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 'var(--space-sm)', marginTop: 'var(--space-md)' }}>
+                {item.techStack && item.techStack.map((tech, i) => (
+                  <TechIcon key={i} icon={tech.icon} name={tech.name} />
+                ))}
+                {item.platforms && item.platforms.map((platform, i) => (
+                  <PlatformIcon key={`p-${i}`} icon={platform.icon} name={platform.name} />
+                ))}
+              </div>
+            )}
+            {item.link && (
+              item.link.image ? (
+                <a
+                  href={item.link.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 'var(--space-md)',
+                    marginTop: 'var(--space-md)',
+                    padding: 'var(--space-sm)',
+                    border: '1px solid var(--border-light)',
+                    borderRadius: 'var(--radius-md)',
+                    textDecoration: 'none',
+                    color: 'inherit',
+                    background: 'var(--bg-secondary)',
+                    transition: 'background 0.2s ease',
+                  }}
+                >
+                  <img
+                    src={item.link.image}
+                    alt=""
+                    style={{
+                      width: '120px',
+                      height: '80px',
+                      objectFit: 'cover',
+                      borderRadius: 'var(--radius-sm)',
+                      flexShrink: 0,
+                    }}
+                  />
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{
+                      fontSize: 'var(--text-sm)',
+                      fontWeight: 500,
+                      color: 'var(--text-primary)',
+                      marginBottom: '4px',
+                      overflow: 'hidden',
+                      textOverflow: 'ellipsis',
+                      display: '-webkit-box',
+                      WebkitLineClamp: 2,
+                      WebkitBoxOrient: 'vertical',
+                    }}>
+                      <TranslatedText en={item.link.title.en} ja={item.link.title.ja} />
+                    </div>
+                    <div style={{
+                      fontSize: '11px',
+                      color: 'var(--text-muted)',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '4px',
+                    }}>
+                      <span style={{ fontSize: '12px' }}>🔗</span>
+                      {item.link.source}
+                    </div>
+                  </div>
+                </a>
+              ) : (
+                <a href={item.link.href} target="_blank" rel="noreferrer" className="btn btn-ghost" style={{ marginTop: 'var(--space-sm)' }}>
+                  <TranslatedText en={item.link.label.en} ja={item.link.label.ja} /> →
+                </a>
+              )
+            )}
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -231,7 +485,7 @@ function MainPage() {
         </section>
 
         {/* Quick Intro */}
-        <section className="section">
+        <section className="section" style={{ paddingBottom: 'var(--space-lg)' }}>
           <div className="container">
             <div className="callout">
               <div className="callout-icon">👋</div>
@@ -247,8 +501,24 @@ function MainPage() {
           </div>
         </section>
 
+        {/* Work Experience */}
+        <section className="section" id="work" style={{ paddingTop: 0 }}>
+          <div className="container">
+            <h2 className="section-heading">
+              <TranslatedText en="Work Experience" ja="職歴" />
+            </h2>
+            <div className="notion-timeline">
+              {workExperience.map((item) => (
+                <TimelineItem key={item.id} item={item} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <div className="container"><div className="divider" /></div>
+
         {/* Tech Stack */}
-        <section className="section" style={{ paddingTop: 0 }}>
+        <section className="section">
           <div className="container">
             <h2 className="section-heading">
               <TranslatedText en="Tech Stack" ja="技術スタック" />
@@ -266,16 +536,87 @@ function MainPage() {
 
         <div className="container"><div className="divider" /></div>
 
-        {/* Work Experience */}
-        <section className="section" id="work">
+        {/* GitHub Stats */}
+        <section className="section">
           <div className="container">
             <h2 className="section-heading">
-              <TranslatedText en="Work Experience" ja="職歴" />
+              <TranslatedText en="GitHub Activity" ja="GitHubアクティビティ" />
             </h2>
-            <div className="notion-timeline">
-              {workExperience.map((item) => (
-                <TimelineItem key={item.id} item={item} />
-              ))}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)', alignItems: 'center' }}>
+              {/* GitHub Profile Card */}
+              <a
+                href="https://github.com/rbarmon"
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: 'var(--space-xl)',
+                  padding: 'var(--space-xl)',
+                  border: '1px solid var(--border-light)',
+                  borderRadius: 'var(--radius-md)',
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  background: 'var(--bg-secondary)',
+                  width: '100%',
+                  maxWidth: '800px',
+                  transition: 'box-shadow 0.2s ease',
+                }}
+              >
+                <img
+                  src="https://avatars.githubusercontent.com/u/106299081?v=4"
+                  alt="rbarmon"
+                  style={{
+                    width: '120px',
+                    height: '120px',
+                    borderRadius: '50%',
+                    flexShrink: 0,
+                  }}
+                />
+                <div style={{ flex: 1 }}>
+                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
+                    <span style={{ fontWeight: 600, fontSize: '24px' }}>rbarmon</span>
+                    <span style={{ color: 'var(--text-muted)', fontSize: '18px' }}>Rian</span>
+                  </div>
+                  <div style={{ display: 'flex', gap: 'var(--space-xl)', fontSize: '16px', color: 'var(--text-muted)' }}>
+                    <span>📍 Japan</span>
+                    <span>📦 4 repos</span>
+                    <span>👥 4 followers</span>
+                  </div>
+                </div>
+                <svg height="40" width="40" viewBox="0 0 16 16" fill="currentColor" style={{ color: 'var(--text-muted)' }}>
+                  <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
+                </svg>
+              </a>
+
+              {/* Contribution Graph */}
+              <img
+                src="https://ghchart.rshah.org/rbarmon"
+                alt="GitHub Contribution Graph"
+                style={{ width: '100%', maxWidth: '800px', borderRadius: 'var(--radius-md)' }}
+              />
+
+              {/* Stats Cards - hidden for now
+              <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap', justifyContent: 'center' }}>
+                <img
+                  src="https://github-readme-stats.vercel.app/api?username=rbarmon&show_icons=true&theme=default&hide_border=true&bg_color=00000000"
+                  alt="GitHub Stats"
+                  style={{ maxWidth: '400px', width: '100%' }}
+                />
+                <img
+                  src="https://github-readme-stats.vercel.app/api/top-langs/?username=rbarmon&layout=compact&theme=default&hide_border=true&bg_color=00000000"
+                  alt="Top Languages"
+                  style={{ maxWidth: '350px', width: '100%' }}
+                />
+              </div>
+              */}
+
+              {/* Streak Stats */}
+              <img
+                src="https://github-readme-streak-stats.herokuapp.com/?user=rbarmon&theme=default&hide_border=true&background=00000000"
+                alt="GitHub Streak"
+                style={{ maxWidth: '500px', width: '100%' }}
+              />
             </div>
           </div>
         </section>
@@ -307,9 +648,9 @@ function MainPage() {
           </div>
         </section>
 
+        {/* Projects - commented out for now
         <div className="container"><div className="divider" /></div>
 
-        {/* Projects */}
         <section className="section" id="projects">
           <div className="container">
             <h2 className="section-heading">
@@ -324,6 +665,7 @@ function MainPage() {
         </section>
 
         <div className="container"><div className="divider" /></div>
+        */}
 
         {/* Contact */}
         <section className="section" id="contact">
@@ -361,7 +703,7 @@ function MainPage() {
               <ul className="footer-links">
                 <li><a href="#about"><TranslatedText en="About" ja="紹介" /></a></li>
                 <li><a href="#work"><TranslatedText en="Work" ja="職歴" /></a></li>
-                <li><a href="#projects"><TranslatedText en="Projects" ja="プロジェクト" /></a></li>
+                {/* <li><a href="#projects"><TranslatedText en="Projects" ja="プロジェクト" /></a></li> */}
               </ul>
             </div>
             <div className="footer-section">
