@@ -15,8 +15,8 @@ const collageItems = [
     degree: 'B.S. Computer Science',
     logo: '/images/collage/monash-logo.svg',
     link: 'https://www.monash.edu/study/courses/find-a-course/computer-science-c2001',
-    // x: 180/1400 = 0.129, y: 90/700 = 0.129 (shifted up 20px more)
-    positionPercent: { x: 0.129, y: 0.129 },
+    // x: 180/1400 = 0.129, y shifted up
+    positionPercent: { x: 0.129, y: 0.09 },
     rotation: -3,
     zIndex: 10,
   },
@@ -25,8 +25,8 @@ const collageItems = [
     type: 'image',
     src: '/images/profile/big/profile1.png',
     alt: 'Rian Kawahara',
-    // centered horizontally with slight offset to right
-    positionPercent: { x: 0.5, y: 0.1 },
+    // centered horizontally with slight offset to right, shifted up
+    positionPercent: { x: 0.5, y: 0.06 },
     centerX: true,
     centerOffset: 15,
     elementWidth: 216,
@@ -66,8 +66,8 @@ const collageItems = [
     company: 'Little Help Agency',
     role: 'Software Engineer',
     link: 'https://www.littlehelp.co.jp/',
-    // x: 990/1400 = 0.707
-    positionPercent: { x: 0.707, y: 0.214 },
+    // x: 990/1400 = 0.707, y shifted up
+    positionPercent: { x: 0.707, y: 0.17 },
     rotation: 3,
     zIndex: 11,
   },
