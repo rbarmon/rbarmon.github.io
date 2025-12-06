@@ -832,7 +832,7 @@ function MainPage() {
               <a href="https://github.com/rbarmon" target="_blank" rel="noreferrer" className="btn btn-secondary">
                 GitHub
               </a>
-              <a href="https://linkedin.com/in/rian-kawahara" target="_blank" rel="noreferrer" className="btn btn-secondary">
+              <a href="https://www.linkedin.com/in/rian-barrett-40a090261/" target="_blank" rel="noreferrer" className="btn btn-secondary">
                 LinkedIn
               </a>
             </div>
@@ -862,7 +862,7 @@ function MainPage() {
               <h5><TranslatedText en="Social" ja="ソーシャル" /></h5>
               <ul className="footer-links">
                 <li><a href="https://github.com/rbarmon" target="_blank" rel="noreferrer">GitHub</a></li>
-                <li><a href="https://linkedin.com/in/rian-kawahara" target="_blank" rel="noreferrer">LinkedIn</a></li>
+                <li><a href="https://www.linkedin.com/in/rian-barrett-40a090261/" target="_blank" rel="noreferrer">LinkedIn</a></li>
               </ul>
             </div>
           </div>
