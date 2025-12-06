@@ -801,8 +801,15 @@ const DraggableCollage = ({ name, jobTitle }) => {
   // Calculate actual pixel positions based on container size
   const calculatePosition = (item) => {
     const { positionPercent, centerX, elementWidth, centerOffset = 0 } = item;
+
+    // Scale x based on container width
     let x = positionPercent.x * containerSize.width;
-    const y = positionPercent.y * containerSize.height;
+
+    // For y: use reference height scaled to container, then center vertically
+    // This keeps items clustered in the center rather than spreading when container gets taller
+    const scaledHeight = Math.min(containerSize.height, REFERENCE_HEIGHT * (containerSize.width / REFERENCE_WIDTH));
+    const yOffset = (containerSize.height - scaledHeight) / 2; // Center the layout vertically
+    const y = yOffset + (positionPercent.y * scaledHeight);
 
     // If centerX is true, center the element by subtracting half its width
     if (centerX && elementWidth) {
