@@ -814,10 +814,16 @@ const DraggableCollage = ({ name, jobTitle }) => {
     const yOffset = (containerSize.height - effectiveHeight) / 2;
     let y = yOffset + (positionPercent.y * effectiveHeight);
 
-    // On larger screens (16"+), push top elements down a bit more
-    if (containerSize.width > 1400 && positionPercent.y < 0.3) {
-      const extraOffset = ((containerSize.width - 1400) / 400) * 40; // up to 40px extra on 1800px+
-      y += extraOffset;
+    // On larger screens (16"+), push top elements down and bottom elements up
+    if (containerSize.width > 1400) {
+      const factor = (containerSize.width - 1400) / 400; // 0 to 1 for 1400-1800px
+      if (positionPercent.y < 0.3) {
+        // Top elements: push down
+        y += factor * 40; // up to 40px down
+      } else if (positionPercent.y > 0.5) {
+        // Bottom elements: push up
+        y -= factor * 40; // up to 40px up
+      }
     }
 
     // If centerX is true, center the element by subtracting half its width
