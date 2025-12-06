@@ -604,6 +604,7 @@ function MainPage() {
           bottom: '20px',
           right: '20px',
           display: 'flex',
+          flexDirection: 'column',
           gap: '8px',
           zIndex: 999,
         }}
