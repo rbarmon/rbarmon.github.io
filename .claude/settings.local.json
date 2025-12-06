@@ -13,7 +13,10 @@
       "Bash(git rm:*)",
       "Bash(git branch:*)",
       "Bash(tree:*)",
-      "Bash(find:*)"
+      "Bash(find:*)",
+      "Bash(ls:*)",
+      "WebFetch(domain:www.openbadge-global.com)",
+      "WebFetch(domain:api.github.com)"
     ],
     "deny": [],
     "ask": []

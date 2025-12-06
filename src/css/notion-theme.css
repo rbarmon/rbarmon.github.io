@@ -637,7 +637,7 @@ a:hover {
 .divider {
   height: 1px;
   background: var(--border-light);
-  margin: var(--space-2xl) 0;
+  margin: var(--space-md) 0;
 }
 
 /*---------------------------------------

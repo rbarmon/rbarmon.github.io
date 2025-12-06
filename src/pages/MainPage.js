@@ -284,10 +284,20 @@ const techStack = [
 ];
 
 // Navbar Component
-const Navbar = ({ language, onToggleLanguage, isDarkMode, onToggleDarkMode }) => (
+const Navbar = ({ language, onToggleLanguage, isDarkMode, onToggleDarkMode, showBackToTop }) => (
   <nav className="notion-navbar">
     <div className="navbar-content">
-      <a href="#" className="navbar-brand">RK</a>
+      <a
+        href="#about"
+        className="navbar-brand"
+        style={{
+          opacity: showBackToTop ? 1 : 0,
+          pointerEvents: showBackToTop ? 'auto' : 'none',
+          transition: 'opacity 0.3s ease',
+        }}
+      >
+        ↑ Top
+      </a>
       <ul className="navbar-links">
         <li><a href="#about"><TranslatedText en="About" ja="紹介" /></a></li>
         <li><a href="#work"><TranslatedText en="Work" ja="職歴" /></a></li>
@@ -458,10 +468,20 @@ const ProjectCard = ({ project }) => (
 function MainPage() {
   const [language, setLanguage] = useState('en');
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [showBackToTop, setShowBackToTop] = useState(false);
 
   useEffect(() => {
     document.body.classList.toggle('dark-mode', isDarkMode);
   }, [isDarkMode]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Show back to top after scrolling past ~600px (collage height)
+      setShowBackToTop(window.scrollY > 600);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const toggleLanguage = () => setLanguage((prev) => (prev === 'en' ? 'ja' : 'en'));
   const toggleDarkMode = () => setIsDarkMode((prev) => !prev);
@@ -476,6 +496,7 @@ function MainPage() {
         onToggleLanguage={toggleLanguage}
         isDarkMode={isDarkMode}
         onToggleDarkMode={toggleDarkMode}
+        showBackToTop={showBackToTop}
       />
 
       <main style={{ paddingTop: '40px' }}>
