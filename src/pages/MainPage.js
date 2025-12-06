@@ -315,8 +315,6 @@ const Navbar = ({ language, onToggleLanguage, isDarkMode, onToggleDarkMode, show
     { type: 'link', href: '#about', labelEn: 'About', labelJa: '紹介', section: 'about' },
     { type: 'link', href: '#work', labelEn: 'Work', labelJa: '職歴', section: 'work' },
     { type: 'link', href: '#contact', labelEn: 'Contact', labelJa: '連絡', section: 'contact' },
-    { type: 'button', action: 'language', label: language === 'en' ? 'JP' : 'EN' },
-    { type: 'button', action: 'darkMode', label: isDarkMode ? '☀️' : '🌙' },
   ];
 
   // Mobile navbar
@@ -393,20 +391,7 @@ const Navbar = ({ language, onToggleLanguage, isDarkMode, onToggleDarkMode, show
             );
           }
 
-          return (
-            <button
-              key={index}
-              className="dock-item"
-              style={{
-                transform: `scale(${scale})`,
-                zIndex: hoveredIndex === index ? 10 : 1,
-              }}
-              onMouseEnter={() => setHoveredIndex(index)}
-              onClick={item.action === 'language' ? onToggleLanguage : onToggleDarkMode}
-            >
-              {item.label}
-            </button>
-          );
+          return null;
         })}
       </div>
     </nav>
@@ -614,7 +599,14 @@ function MainPage() {
       <main style={{ paddingTop: 0 }}>
         {/* Hero - Draggable Collage */}
         <section id="about">
-          <DraggableCollage name={heroName} jobTitle={heroTitle} />
+          <DraggableCollage
+            name={heroName}
+            jobTitle={heroTitle}
+            language={language}
+            onToggleLanguage={toggleLanguage}
+            isDarkMode={isDarkMode}
+            onToggleDarkMode={toggleDarkMode}
+          />
         </section>
 
         {/* Quick Intro */}
