@@ -615,22 +615,23 @@ function MainPage() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '10px 16px',
-            fontSize: '13px',
-            fontWeight: 500,
+            width: '40px',
+            height: '40px',
+            fontSize: '12px',
+            fontWeight: 600,
             color: 'var(--text-secondary)',
             background: 'rgba(255, 255, 255, 0.9)',
             backdropFilter: 'blur(10px)',
             WebkitBackdropFilter: 'blur(10px)',
             border: 'none',
-            borderRadius: '20px',
+            borderRadius: '12px',
             boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04)',
             cursor: 'pointer',
             transition: 'all 0.2s ease',
             fontFamily: 'var(--font-primary)',
           }}
         >
-          {language === 'en' ? '日本語' : 'English'}
+          {language === 'en' ? 'JP' : 'EN'}
         </button>
         <button
           onClick={toggleDarkMode}
@@ -638,14 +639,15 @@ function MainPage() {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            padding: '10px 14px',
-            fontSize: '15px',
+            width: '40px',
+            height: '40px',
+            fontSize: '16px',
             color: 'var(--text-secondary)',
             background: 'rgba(255, 255, 255, 0.9)',
             backdropFilter: 'blur(10px)',
             WebkitBackdropFilter: 'blur(10px)',
             border: 'none',
-            borderRadius: '20px',
+            borderRadius: '12px',
             boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04)',
             cursor: 'pointer',
             transition: 'all 0.2s ease',
