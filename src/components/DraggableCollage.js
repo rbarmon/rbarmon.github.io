@@ -763,9 +763,10 @@ const MobileCarousel = ({ items, name, jobTitle, language, onToggleLanguage, isD
       {/* Settings toggles */}
       <div style={{
         display: 'flex',
-        justifyContent: 'center',
+        justifyContent: 'flex-end',
         gap: '8px',
         paddingBottom: '20px',
+        paddingRight: '20px',
       }}>
         <button
           onClick={onToggleLanguage}
@@ -919,14 +920,13 @@ const DraggableCollage = ({ name, jobTitle, language, onToggleLanguage, isDarkMo
           Drag items to rearrange
         </div>
 
-        {/* Settings toggles at bottom */}
+        {/* Settings toggles at bottom right */}
         <div
           className="hero-settings"
           style={{
             position: 'absolute',
             bottom: '20px',
-            left: '50%',
-            transform: 'translateX(-50%)',
+            right: '20px',
             display: 'flex',
             gap: '8px',
             zIndex: 20,
