@@ -224,7 +224,7 @@ function MainPage() {
         onToggleDarkMode={toggleDarkMode}
       />
 
-      <main style={{ paddingTop: '60px' }}>
+      <main style={{ paddingTop: '40px' }}>
         {/* Hero - Draggable Collage */}
         <section id="about">
           <DraggableCollage name={heroName} jobTitle={heroTitle} />

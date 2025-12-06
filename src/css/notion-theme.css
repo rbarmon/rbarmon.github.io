@@ -185,11 +185,11 @@ a:hover {
   COLLAGE HERO
 -----------------------------------------*/
 .collage-hero {
-  padding: var(--space-md) var(--space-lg) var(--space-lg);
-  min-height: auto;
+  padding: 0;
+  height: calc(100vh - 40px);
+  max-height: 900px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
 }
 
 .collage-header {
@@ -213,8 +213,8 @@ a:hover {
 
 .collage-container {
   background: var(--bg-secondary);
-  border-radius: var(--radius-lg);
-  border: 1px solid var(--border-light);
+  border-radius: 0;
+  border: none;
 }
 
 .collage-hint {

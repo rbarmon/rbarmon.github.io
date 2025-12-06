@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import Draggable from 'react-draggable';
 
 const collageItems = [
@@ -7,7 +7,7 @@ const collageItems = [
     type: 'university-badge',
     university: 'Monash University',
     degree: 'B.S. Computer Science',
-    initialPosition: { x: 40, y: 50 },
+    initialPosition: { x: 200, y: 60 },
     rotation: -3,
     zIndex: 10,
   },
@@ -16,7 +16,7 @@ const collageItems = [
     type: 'image',
     src: '/images/profile/big/profile1.png',
     alt: 'Rian Kawahara',
-    initialPosition: { x: 500, y: 30 },
+    initialPosition: { x: 650, y: 40 },
     size: { width: 200, height: 'auto' },
     rotation: 2,
     zIndex: 15,
@@ -26,7 +26,7 @@ const collageItems = [
     type: 'tech-badge',
     icon: 'devicon-react-original',
     label: 'React',
-    initialPosition: { x: 120, y: 550 },
+    initialPosition: { x: 220, y: 680 },
     rotation: 5,
     zIndex: 12,
   },
@@ -35,7 +35,7 @@ const collageItems = [
     type: 'tech-badge',
     icon: 'devicon-typescript-plain',
     label: 'TypeScript',
-    initialPosition: { x: 50, y: 380 },
+    initialPosition: { x: 200, y: 480 },
     rotation: -4,
     zIndex: 11,
   },
@@ -44,7 +44,7 @@ const collageItems = [
     type: 'tech-badge',
     icon: 'devicon-python-plain',
     label: 'Python',
-    initialPosition: { x: 950, y: 550 },
+    initialPosition: { x: 1190, y: 680 },
     rotation: 3,
     zIndex: 13,
   },
@@ -53,7 +53,7 @@ const collageItems = [
     type: 'tech-badge',
     icon: 'devicon-kotlin-plain',
     label: 'Kotlin',
-    initialPosition: { x: 900, y: 80 },
+    initialPosition: { x: 1140, y: 80 },
     rotation: -2,
     zIndex: 11,
   },
@@ -62,24 +62,26 @@ const collageItems = [
     type: 'achievement',
     title: 'Tokyo Hackathon',
     subtitle: 'Business Award 2024',
-    initialPosition: { x: 950, y: 280 },
+    initialPosition: { x: 1160, y: 320 },
     rotation: 4,
     zIndex: 14,
   },
   {
-    id: 'article-note',
-    type: 'sticky-note',
-    text: 'Featured in\nDiamondhead\nIntern Article',
-    initialPosition: { x: 30, y: 200 },
-    rotation: -5,
-    color: '#FEF3C7',
+    id: 'article-card',
+    type: 'article-card',
+    image: '/images/collage/diamondhead-article.png',
+    title: 'Featured in Diamondhead',
+    subtitle: 'Intern Article',
+    link: 'https://note.com/diamondhead/n/n4a1f53c731f4',
+    initialPosition: { x: 190, y: 240 },
+    rotation: -4,
     zIndex: 9,
   },
   {
     id: 'location',
     type: 'location-tag',
     text: 'Tokyo, Japan',
-    initialPosition: { x: 520, y: 650 },
+    initialPosition: { x: 720, y: 680 },
     rotation: 0,
     zIndex: 10,
   },
@@ -88,18 +90,30 @@ const collageItems = [
 const CollageItem = ({ item, onDragStart, onDragStop }) => {
   const nodeRef = useRef(null);
   const [isDragging, setIsDragging] = useState(false);
+  const [hasDragged, setHasDragged] = useState(false);
   const [zIndex, setZIndex] = useState(item.zIndex);
 
   const handleStart = () => {
     setIsDragging(true);
+    setHasDragged(false);
     setZIndex(100);
     onDragStart?.(item.id);
+  };
+
+  const handleDrag = () => {
+    setHasDragged(true);
   };
 
   const handleStop = () => {
     setIsDragging(false);
     setZIndex(item.zIndex);
     onDragStop?.(item.id);
+  };
+
+  const handleClick = () => {
+    if (!hasDragged && item.link) {
+      window.open(item.link, '_blank');
+    }
   };
 
   const baseStyle = {
@@ -300,6 +314,52 @@ const CollageItem = ({ item, onDragStart, onDragStop }) => {
           </div>
         );
 
+      case 'article-card':
+        return (
+          <div
+            style={{
+              ...baseStyle,
+              background: '#fff',
+              padding: '8px',
+              boxShadow: isDragging
+                ? '0 20px 40px rgba(0,0,0,0.3)'
+                : '0 4px 12px rgba(0,0,0,0.15)',
+              borderRadius: '8px',
+              width: '180px',
+            }}
+          >
+            <img
+              src={item.image}
+              alt={item.title}
+              style={{
+                width: '100%',
+                height: '100px',
+                objectFit: 'cover',
+                borderRadius: '4px',
+                marginBottom: '8px',
+                pointerEvents: 'none',
+              }}
+              draggable={false}
+            />
+            <div style={{
+              fontSize: '12px',
+              fontWeight: 600,
+              color: '#37352F',
+              fontFamily: 'Inter, sans-serif',
+              marginBottom: '2px',
+            }}>
+              {item.title}
+            </div>
+            <div style={{
+              fontSize: '11px',
+              color: '#787774',
+              fontFamily: 'Inter, sans-serif',
+            }}>
+              {item.subtitle} →
+            </div>
+          </div>
+        );
+
       default:
         return null;
     }
@@ -310,10 +370,11 @@ const CollageItem = ({ item, onDragStart, onDragStop }) => {
       nodeRef={nodeRef}
       defaultPosition={item.initialPosition}
       onStart={handleStart}
+      onDrag={handleDrag}
       onStop={handleStop}
       bounds="parent"
     >
-      <div ref={nodeRef} style={{ position: 'absolute' }}>
+      <div ref={nodeRef} style={{ position: 'absolute' }} onClick={handleClick}>
         {renderContent()}
       </div>
     </Draggable>
@@ -321,22 +382,7 @@ const CollageItem = ({ item, onDragStart, onDragStop }) => {
 };
 
 const DraggableCollage = ({ name, jobTitle }) => {
-  const [containerHeight, setContainerHeight] = useState(750);
   const containerRef = useRef(null);
-
-  useEffect(() => {
-    const updateHeight = () => {
-      if (window.innerWidth < 768) {
-        setContainerHeight(700);
-      } else {
-        setContainerHeight(750);
-      }
-    };
-
-    updateHeight();
-    window.addEventListener('resize', updateHeight);
-    return () => window.removeEventListener('resize', updateHeight);
-  }, []);
 
   return (
     <div className="collage-hero">
@@ -345,10 +391,8 @@ const DraggableCollage = ({ name, jobTitle }) => {
         className="collage-container"
         style={{
           position: 'relative',
-          height: containerHeight,
+          flex: 1,
           width: '100%',
-          maxWidth: '1200px',
-          margin: '0 auto',
           overflow: 'hidden',
         }}
       >
