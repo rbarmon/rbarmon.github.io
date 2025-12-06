@@ -320,12 +320,12 @@ const CollageItem = ({ item, onDragStart, onDragStop }) => {
             style={{
               ...baseStyle,
               background: '#fff',
-              padding: '8px',
+              padding: '12px',
               boxShadow: isDragging
                 ? '0 20px 40px rgba(0,0,0,0.3)'
                 : '0 4px 12px rgba(0,0,0,0.15)',
-              borderRadius: '8px',
-              width: '180px',
+              borderRadius: '10px',
+              width: '240px',
             }}
           >
             <img
@@ -333,25 +333,25 @@ const CollageItem = ({ item, onDragStart, onDragStop }) => {
               alt={item.title}
               style={{
                 width: '100%',
-                height: '100px',
+                height: '140px',
                 objectFit: 'cover',
-                borderRadius: '4px',
-                marginBottom: '8px',
+                borderRadius: '6px',
+                marginBottom: '10px',
                 pointerEvents: 'none',
               }}
               draggable={false}
             />
             <div style={{
-              fontSize: '12px',
+              fontSize: '14px',
               fontWeight: 600,
               color: '#37352F',
               fontFamily: 'Inter, sans-serif',
-              marginBottom: '2px',
+              marginBottom: '4px',
             }}>
               {item.title}
             </div>
             <div style={{
-              fontSize: '11px',
+              fontSize: '12px',
               color: '#787774',
               fontFamily: 'Inter, sans-serif',
             }}>
