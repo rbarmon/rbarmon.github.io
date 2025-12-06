@@ -469,7 +469,7 @@ const CollageItem = ({ item, calculatedPosition, onDragStart, onDragStop }) => {
 };
 
 // Mobile Carousel Component
-const MobileCarousel = ({ items, name, jobTitle, language, onToggleLanguage, isDarkMode, onToggleDarkMode }) => {
+const MobileCarousel = ({ items, name, jobTitle }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
@@ -760,58 +760,6 @@ const MobileCarousel = ({ items, name, jobTitle, language, onToggleLanguage, isD
         ))}
       </div>
 
-      {/* Settings toggles */}
-      <div style={{
-        display: 'flex',
-        justifyContent: 'flex-end',
-        gap: '8px',
-        paddingBottom: '20px',
-        paddingRight: '20px',
-      }}>
-        <button
-          onClick={onToggleLanguage}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '8px 14px',
-            fontSize: '12px',
-            fontWeight: 500,
-            color: '#787774',
-            background: 'rgba(255, 255, 255, 0.9)',
-            backdropFilter: 'blur(10px)',
-            WebkitBackdropFilter: 'blur(10px)',
-            border: 'none',
-            borderRadius: '16px',
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
-            cursor: 'pointer',
-            fontFamily: 'Inter, sans-serif',
-          }}
-        >
-          {language === 'en' ? '日本語' : 'English'}
-        </button>
-        <button
-          onClick={onToggleDarkMode}
-          style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            padding: '8px 12px',
-            fontSize: '14px',
-            color: '#787774',
-            background: 'rgba(255, 255, 255, 0.9)',
-            backdropFilter: 'blur(10px)',
-            WebkitBackdropFilter: 'blur(10px)',
-            border: 'none',
-            borderRadius: '16px',
-            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08)',
-            cursor: 'pointer',
-          }}
-        >
-          {isDarkMode ? '☀️' : '🌙'}
-        </button>
-      </div>
-
       {/* Swipe hint */}
       <div style={{
         textAlign: 'center',
@@ -826,7 +774,7 @@ const MobileCarousel = ({ items, name, jobTitle, language, onToggleLanguage, isD
   );
 };
 
-const DraggableCollage = ({ name, jobTitle, language, onToggleLanguage, isDarkMode, onToggleDarkMode }) => {
+const DraggableCollage = ({ name, jobTitle }) => {
   const containerRef = useRef(null);
   const [containerSize, setContainerSize] = useState({ width: REFERENCE_WIDTH, height: REFERENCE_HEIGHT });
   const [isMobile, setIsMobile] = useState(false);
@@ -866,17 +814,7 @@ const DraggableCollage = ({ name, jobTitle, language, onToggleLanguage, isDarkMo
 
   // Render mobile carousel on small screens
   if (isMobile) {
-    return (
-      <MobileCarousel
-        items={collageItems}
-        name={name}
-        jobTitle={jobTitle}
-        language={language}
-        onToggleLanguage={onToggleLanguage}
-        isDarkMode={isDarkMode}
-        onToggleDarkMode={onToggleDarkMode}
-      />
-    );
+    return <MobileCarousel items={collageItems} name={name} jobTitle={jobTitle} />;
   }
 
   // Desktop: render draggable collage
@@ -918,66 +856,6 @@ const DraggableCollage = ({ name, jobTitle, language, onToggleLanguage, isDarkMo
 
         <div className="collage-hint">
           Drag items to rearrange
-        </div>
-
-        {/* Settings toggles at bottom right */}
-        <div
-          className="hero-settings"
-          style={{
-            position: 'absolute',
-            bottom: '20px',
-            right: '20px',
-            display: 'flex',
-            gap: '8px',
-            zIndex: 20,
-          }}
-        >
-          <button
-            onClick={onToggleLanguage}
-            className="hero-toggle-btn"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '10px 16px',
-              fontSize: '13px',
-              fontWeight: 500,
-              color: 'var(--text-secondary)',
-              background: 'rgba(255, 255, 255, 0.9)',
-              backdropFilter: 'blur(10px)',
-              WebkitBackdropFilter: 'blur(10px)',
-              border: 'none',
-              borderRadius: '20px',
-              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04)',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-              fontFamily: 'Inter, sans-serif',
-            }}
-          >
-            {language === 'en' ? '日本語' : 'English'}
-          </button>
-          <button
-            onClick={onToggleDarkMode}
-            className="hero-toggle-btn"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              padding: '10px 14px',
-              fontSize: '15px',
-              color: 'var(--text-secondary)',
-              background: 'rgba(255, 255, 255, 0.9)',
-              backdropFilter: 'blur(10px)',
-              WebkitBackdropFilter: 'blur(10px)',
-              border: 'none',
-              borderRadius: '20px',
-              boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04)',
-              cursor: 'pointer',
-              transition: 'all 0.2s ease',
-            }}
-          >
-            {isDarkMode ? '☀️' : '🌙'}
-          </button>
         </div>
       </div>
     </div>

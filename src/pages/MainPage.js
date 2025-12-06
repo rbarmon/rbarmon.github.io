@@ -596,17 +596,68 @@ function MainPage() {
         activeSection={activeSection}
       />
 
+      {/* Fixed settings toggles - bottom right throughout page */}
+      <div
+        className="fixed-settings"
+        style={{
+          position: 'fixed',
+          bottom: '20px',
+          right: '20px',
+          display: 'flex',
+          gap: '8px',
+          zIndex: 999,
+        }}
+      >
+        <button
+          onClick={toggleLanguage}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '10px 16px',
+            fontSize: '13px',
+            fontWeight: 500,
+            color: 'var(--text-secondary)',
+            background: 'rgba(255, 255, 255, 0.9)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            border: 'none',
+            borderRadius: '20px',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04)',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease',
+            fontFamily: 'var(--font-primary)',
+          }}
+        >
+          {language === 'en' ? '日本語' : 'English'}
+        </button>
+        <button
+          onClick={toggleDarkMode}
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            padding: '10px 14px',
+            fontSize: '15px',
+            color: 'var(--text-secondary)',
+            background: 'rgba(255, 255, 255, 0.9)',
+            backdropFilter: 'blur(10px)',
+            WebkitBackdropFilter: 'blur(10px)',
+            border: 'none',
+            borderRadius: '20px',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(0, 0, 0, 0.04)',
+            cursor: 'pointer',
+            transition: 'all 0.2s ease',
+          }}
+        >
+          {isDarkMode ? '☀️' : '🌙'}
+        </button>
+      </div>
+
       <main style={{ paddingTop: 0 }}>
         {/* Hero - Draggable Collage */}
         <section id="about">
-          <DraggableCollage
-            name={heroName}
-            jobTitle={heroTitle}
-            language={language}
-            onToggleLanguage={toggleLanguage}
-            isDarkMode={isDarkMode}
-            onToggleDarkMode={toggleDarkMode}
-          />
+          <DraggableCollage name={heroName} jobTitle={heroTitle} />
         </section>
 
         {/* Quick Intro */}

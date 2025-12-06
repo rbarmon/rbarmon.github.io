@@ -1034,6 +1034,27 @@ body.dark-mode .nav-bubble-active:hover {
   height: auto;
 }
 
+/*---------------------------------------
+  FIXED SETTINGS TOGGLES
+-----------------------------------------*/
+.fixed-settings button {
+  transition: all 0.2s ease;
+}
+
+.fixed-settings button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+
+body.dark-mode .fixed-settings button {
+  background: rgba(40, 40, 40, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.06);
+}
+
+body.dark-mode .fixed-settings button:hover {
+  background: rgba(50, 50, 50, 0.95);
+}
+
 /* GitHub Section Mobile */
 @media (max-width: 768px) {
   .github-profile-card {
