@@ -826,9 +826,9 @@ function MainPage() {
               <TranslatedText en="Get in Touch" ja="連絡先" />
             </h2>
             <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap' }}>
-              <a href="mailto:rbar0032@student.monash.edu" className="btn btn-primary">
+              {/* <a href="mailto:rbar0032@student.monash.edu" className="btn btn-primary">
                 Email Me
-              </a>
+              </a> */}
               <a href="https://github.com/rbarmon" target="_blank" rel="noreferrer" className="btn btn-secondary">
                 GitHub
               </a>
