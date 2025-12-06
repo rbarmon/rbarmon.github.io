@@ -284,35 +284,92 @@ const techStack = [
 ];
 
 // Navbar Component
-const Navbar = ({ language, onToggleLanguage, isDarkMode, onToggleDarkMode, showNav, activeSection }) => (
-  <nav
-    className="notion-navbar"
-    style={{
-      opacity: showNav ? 1 : 0,
-      pointerEvents: showNav ? 'auto' : 'none',
-      transition: 'opacity 0.3s ease',
-    }}
-  >
-    <div className="navbar-content">
-      <a href="#about" className="nav-bubble">↑</a>
-      <a href="#about" className={`nav-bubble ${activeSection === 'about' ? 'nav-bubble-active' : ''}`}>
-        <TranslatedText en="About" ja="紹介" />
-      </a>
-      <a href="#work" className={`nav-bubble ${activeSection === 'work' ? 'nav-bubble-active' : ''}`}>
-        <TranslatedText en="Work" ja="職歴" />
-      </a>
-      <a href="#contact" className={`nav-bubble ${activeSection === 'contact' ? 'nav-bubble-active' : ''}`}>
-        <TranslatedText en="Contact" ja="連絡" />
-      </a>
-      <button className="nav-bubble" onClick={onToggleLanguage}>
-        {language === 'en' ? 'JP' : 'EN'}
-      </button>
-      <button className="nav-bubble" onClick={onToggleDarkMode}>
-        {isDarkMode ? '☀️' : '🌙'}
-      </button>
-    </div>
-  </nav>
-);
+const Navbar = ({ language, onToggleLanguage, isDarkMode, onToggleDarkMode, showNav, activeSection }) => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const handleNavClick = () => {
+    setMobileMenuOpen(false);
+  };
+
+  // Mobile navbar
+  if (isMobile) {
+    return (
+      <nav className="notion-navbar-mobile">
+        {/* Hamburger button - always visible on mobile */}
+        <button
+          className="mobile-menu-toggle"
+          onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          aria-label="Toggle menu"
+        >
+          <span className={`hamburger ${mobileMenuOpen ? 'open' : ''}`}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+
+        {/* Dropdown menu */}
+        <div className={`mobile-dropdown ${mobileMenuOpen ? 'open' : ''}`}>
+          <a href="#about" className={`mobile-nav-item ${activeSection === 'about' ? 'active' : ''}`} onClick={handleNavClick}>
+            <TranslatedText en="About" ja="紹介" />
+          </a>
+          <a href="#work" className={`mobile-nav-item ${activeSection === 'work' ? 'active' : ''}`} onClick={handleNavClick}>
+            <TranslatedText en="Work" ja="職歴" />
+          </a>
+          <a href="#contact" className={`mobile-nav-item ${activeSection === 'contact' ? 'active' : ''}`} onClick={handleNavClick}>
+            <TranslatedText en="Contact" ja="連絡" />
+          </a>
+          <div className="mobile-nav-divider"></div>
+          <button className="mobile-nav-item" onClick={() => { onToggleLanguage(); handleNavClick(); }}>
+            {language === 'en' ? '日本語' : 'English'}
+          </button>
+          <button className="mobile-nav-item" onClick={() => { onToggleDarkMode(); handleNavClick(); }}>
+            {isDarkMode ? '☀️ Light' : '🌙 Dark'}
+          </button>
+        </div>
+      </nav>
+    );
+  }
+
+  // Desktop navbar (existing bubble style)
+  return (
+    <nav
+      className="notion-navbar"
+      style={{
+        opacity: showNav ? 1 : 0,
+        pointerEvents: showNav ? 'auto' : 'none',
+        transition: 'opacity 0.3s ease',
+      }}
+    >
+      <div className="navbar-content">
+        <a href="#about" className="nav-bubble">↑</a>
+        <a href="#about" className={`nav-bubble ${activeSection === 'about' ? 'nav-bubble-active' : ''}`}>
+          <TranslatedText en="About" ja="紹介" />
+        </a>
+        <a href="#work" className={`nav-bubble ${activeSection === 'work' ? 'nav-bubble-active' : ''}`}>
+          <TranslatedText en="Work" ja="職歴" />
+        </a>
+        <a href="#contact" className={`nav-bubble ${activeSection === 'contact' ? 'nav-bubble-active' : ''}`}>
+          <TranslatedText en="Contact" ja="連絡" />
+        </a>
+        <button className="nav-bubble" onClick={onToggleLanguage}>
+          {language === 'en' ? 'JP' : 'EN'}
+        </button>
+        <button className="nav-bubble" onClick={onToggleDarkMode}>
+          {isDarkMode ? '☀️' : '🌙'}
+        </button>
+      </div>
+    </nav>
+  );
+};
 
 // Timeline Item Component
 const TimelineItem = ({ item }) => {
@@ -576,80 +633,49 @@ function MainPage() {
             <h2 className="section-heading">
               <TranslatedText en="GitHub Activity" ja="GitHubアクティビティ" />
             </h2>
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--space-lg)', alignItems: 'center' }}>
+            <div className="github-section">
               {/* GitHub Profile Card */}
               <a
                 href="https://github.com/rbarmon"
                 target="_blank"
                 rel="noreferrer"
-                style={{
-                  display: 'flex',
-                  alignItems: 'center',
-                  gap: 'var(--space-xl)',
-                  padding: 'var(--space-xl)',
-                  border: '1px solid var(--border-light)',
-                  borderRadius: 'var(--radius-md)',
-                  textDecoration: 'none',
-                  color: 'inherit',
-                  background: 'var(--bg-secondary)',
-                  width: '100%',
-                  maxWidth: '800px',
-                  transition: 'box-shadow 0.2s ease',
-                }}
+                className="github-profile-card"
               >
                 <img
                   src="https://avatars.githubusercontent.com/u/106299081?v=4"
                   alt="rbarmon"
-                  style={{
-                    width: '120px',
-                    height: '120px',
-                    borderRadius: '50%',
-                    flexShrink: 0,
-                  }}
+                  className="github-avatar"
                 />
-                <div style={{ flex: 1 }}>
-                  <div style={{ display: 'flex', alignItems: 'center', gap: '12px', marginBottom: '12px' }}>
-                    <span style={{ fontWeight: 600, fontSize: '24px' }}>rbarmon</span>
-                    <span style={{ color: 'var(--text-muted)', fontSize: '18px' }}>Rian</span>
+                <div className="github-info">
+                  <div className="github-name-row">
+                    <span className="github-username">rbarmon</span>
+                    <span className="github-realname">Rian</span>
                   </div>
-                  <div style={{ display: 'flex', gap: 'var(--space-xl)', fontSize: '16px', color: 'var(--text-muted)' }}>
+                  <div className="github-stats-row">
                     <span>📍 Japan</span>
                     <span>📦 4 repos</span>
                     <span>👥 4 followers</span>
                   </div>
                 </div>
-                <svg height="40" width="40" viewBox="0 0 16 16" fill="currentColor" style={{ color: 'var(--text-muted)' }}>
+                <svg className="github-icon" height="40" width="40" viewBox="0 0 16 16" fill="currentColor">
                   <path d="M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z"></path>
                 </svg>
               </a>
 
               {/* Contribution Graph */}
-              <img
-                src="https://ghchart.rshah.org/rbarmon"
-                alt="GitHub Contribution Graph"
-                style={{ width: '100%', maxWidth: '800px', borderRadius: 'var(--radius-md)' }}
-              />
-
-              {/* Stats Cards - hidden for now
-              <div style={{ display: 'flex', gap: 'var(--space-md)', flexWrap: 'wrap', justifyContent: 'center' }}>
+              <div className="github-chart-container">
                 <img
-                  src="https://github-readme-stats.vercel.app/api?username=rbarmon&show_icons=true&theme=default&hide_border=true&bg_color=00000000"
-                  alt="GitHub Stats"
-                  style={{ maxWidth: '400px', width: '100%' }}
-                />
-                <img
-                  src="https://github-readme-stats.vercel.app/api/top-langs/?username=rbarmon&layout=compact&theme=default&hide_border=true&bg_color=00000000"
-                  alt="Top Languages"
-                  style={{ maxWidth: '350px', width: '100%' }}
+                  src="https://ghchart.rshah.org/rbarmon"
+                  alt="GitHub Contribution Graph"
+                  className="github-chart"
                 />
               </div>
-              */}
 
               {/* Streak Stats */}
               <img
                 src="https://github-readme-streak-stats.herokuapp.com/?user=rbarmon&theme=default&hide_border=true&background=00000000"
                 alt="GitHub Streak"
-                style={{ maxWidth: '500px', width: '100%' }}
+                className="github-streak"
               />
             </div>
           </div>

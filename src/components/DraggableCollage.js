@@ -4,6 +4,7 @@ import Draggable from 'react-draggable';
 // Reference dimensions the original layout was designed for
 const REFERENCE_WIDTH = 1400;
 const REFERENCE_HEIGHT = 700;
+const MOBILE_BREAKPOINT = 768;
 
 // Positions as percentages of reference dimensions
 const collageItems = [
@@ -467,15 +468,327 @@ const CollageItem = ({ item, calculatedPosition, onDragStart, onDragStop }) => {
   );
 };
 
+// Mobile Carousel Component
+const MobileCarousel = ({ items, name, jobTitle }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe && currentIndex < items.length - 1) {
+      setCurrentIndex(currentIndex + 1);
+    }
+    if (isRightSwipe && currentIndex > 0) {
+      setCurrentIndex(currentIndex - 1);
+    }
+  };
+
+  const handleCardClick = (item) => {
+    if (item.link) {
+      window.open(item.link, '_blank');
+    }
+  };
+
+  const renderCard = (item, index) => {
+    const offset = index - currentIndex;
+    const isActive = offset === 0;
+
+    return (
+      <div
+        key={item.id}
+        onClick={() => isActive && handleCardClick(item)}
+        style={{
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          transform: `translate(-50%, -50%) translateX(${offset * 85}%) scale(${isActive ? 1 : 0.85}) rotate(${item.rotation * 0.5}deg)`,
+          opacity: Math.abs(offset) > 1 ? 0 : 1 - Math.abs(offset) * 0.3,
+          transition: 'all 0.3s ease-out',
+          zIndex: 10 - Math.abs(offset),
+          cursor: isActive && item.link ? 'pointer' : 'default',
+          pointerEvents: isActive ? 'auto' : 'none',
+        }}
+      >
+        <div
+          style={{
+            background: '#fff',
+            padding: '14px 14px 44px 14px',
+            borderRadius: '4px',
+            boxShadow: isActive
+              ? '0 10px 40px rgba(0,0,0,0.2)'
+              : '0 4px 20px rgba(0,0,0,0.1)',
+            width: '300px',
+            fontFamily: 'Inter, sans-serif',
+          }}
+        >
+          {renderCardContent(item)}
+          <div style={{
+            position: 'absolute',
+            bottom: '12px',
+            left: '12px',
+            right: '12px',
+            fontSize: '11px',
+            color: '#787774',
+            textAlign: 'center',
+          }}>
+            {item.link && '↑ Tap to view'}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  const renderCardContent = (item) => {
+    switch (item.type) {
+      case 'image':
+        return (
+          <img
+            src={item.src}
+            alt={item.alt}
+            style={{
+              width: '100%',
+              height: 'auto',
+              display: 'block',
+              borderRadius: '2px',
+            }}
+            draggable={false}
+          />
+        );
+
+      case 'achievement':
+        return (
+          <div>
+            {item.image && (
+              <img
+                src={item.image}
+                alt={item.title}
+                style={{
+                  width: '100%',
+                  height: 'auto',
+                  marginBottom: '14px',
+                  borderRadius: '2px',
+                }}
+                draggable={false}
+              />
+            )}
+            <div style={{ fontSize: '18px', fontWeight: 600, color: '#37352F', marginBottom: '6px' }}>
+              {item.title}
+            </div>
+            <div style={{ fontSize: '14px', color: '#787774' }}>
+              {item.subtitle}
+            </div>
+          </div>
+        );
+
+      case 'university-badge':
+        return (
+          <div>
+            {item.logo && (
+              <div style={{
+                background: '#003C6C',
+                padding: '20px',
+                borderRadius: '6px',
+                marginBottom: '14px',
+                display: 'flex',
+                justifyContent: 'center',
+              }}>
+                <img
+                  src={item.logo}
+                  alt={item.university}
+                  style={{ height: '50px', filter: 'brightness(0) invert(1)' }}
+                  draggable={false}
+                />
+              </div>
+            )}
+            <div style={{ fontSize: '20px', fontWeight: 700, color: '#37352F', marginBottom: '6px' }}>
+              {item.degree}
+            </div>
+            <div style={{ fontSize: '15px', color: '#787774' }}>
+              {item.university}
+            </div>
+          </div>
+        );
+
+      case 'article-card':
+        return (
+          <div>
+            <img
+              src={item.image}
+              alt={item.title}
+              style={{
+                width: '100%',
+                height: '180px',
+                objectFit: 'cover',
+                borderRadius: '4px',
+                marginBottom: '12px',
+              }}
+              draggable={false}
+            />
+            <div style={{ display: 'flex', alignItems: 'center', gap: '10px', marginBottom: '6px' }}>
+              {item.logo && (
+                <img src={item.logo} alt="" style={{ width: '28px', height: '28px', borderRadius: '4px' }} draggable={false} />
+              )}
+              <div style={{ fontSize: '18px', fontWeight: 600, color: '#37352F' }}>
+                {item.title}
+              </div>
+            </div>
+            <div style={{ fontSize: '14px', color: '#787774' }}>
+              {item.subtitle}
+            </div>
+          </div>
+        );
+
+      case 'company-badge':
+        return (
+          <div style={{ display: 'flex', alignItems: 'center', gap: '14px', padding: '12px 0' }}>
+            <img
+              src={item.logo}
+              alt={item.company}
+              style={{ width: '56px', height: '56px', objectFit: 'contain', borderRadius: '10px' }}
+              draggable={false}
+            />
+            <div>
+              <div style={{ fontSize: '18px', fontWeight: 600, color: '#37352F', marginBottom: '4px' }}>
+                {item.company}
+              </div>
+              <div style={{ fontSize: '14px', color: '#787774' }}>
+                {item.role}
+              </div>
+            </div>
+          </div>
+        );
+
+      case 'location-tag':
+        return (
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', padding: '20px 0' }}>
+            <span style={{ fontSize: '24px' }}>📍</span>
+            <span style={{ fontSize: '18px', color: '#37352F', fontWeight: 500 }}>
+              {item.text}
+            </span>
+          </div>
+        );
+
+      default:
+        return null;
+    }
+  };
+
+  // Filter out location and reorder: profile first, hackathon last
+  const carouselItems = items
+    .filter(item => item.type !== 'location-tag')
+    .sort((a, b) => {
+      // Profile (image type) comes first
+      if (a.type === 'image') return -1;
+      if (b.type === 'image') return 1;
+      // Hackathon (achievement type) comes last
+      if (a.id === 'hackathon-badge') return 1;
+      if (b.id === 'hackathon-badge') return -1;
+      return 0;
+    });
+
+  return (
+    <div className="collage-hero mobile-carousel-hero">
+      {/* Name and title at top */}
+      <div style={{
+        textAlign: 'center',
+        paddingTop: '60px',
+        paddingBottom: '20px',
+        zIndex: 20,
+      }}>
+        <h1 className="collage-name" style={{ fontSize: '2rem' }}>{name}</h1>
+        <p className="collage-title" style={{ fontSize: '1rem' }}>{jobTitle}</p>
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px', marginTop: '8px' }}>
+          <span style={{ fontSize: '14px' }}>📍</span>
+          <span style={{ fontSize: '13px', color: '#787774' }}>Tokyo, Japan</span>
+        </div>
+      </div>
+
+      {/* Carousel */}
+      <div
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
+        style={{
+          position: 'relative',
+          flex: 1,
+          width: '100%',
+          overflow: 'hidden',
+          minHeight: '400px',
+          marginTop: '-50px',
+        }}
+      >
+        {carouselItems.map((item, index) => renderCard(item, index))}
+      </div>
+
+      {/* Dots indicator */}
+      <div style={{
+        display: 'flex',
+        justifyContent: 'center',
+        gap: '8px',
+        paddingBottom: '30px',
+      }}>
+        {carouselItems.map((_, index) => (
+          <button
+            key={index}
+            onClick={() => setCurrentIndex(index)}
+            style={{
+              width: index === currentIndex ? '24px' : '8px',
+              height: '8px',
+              borderRadius: '4px',
+              border: 'none',
+              background: index === currentIndex ? '#37352F' : '#E5E5E5',
+              cursor: 'pointer',
+              transition: 'all 0.2s ease',
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Swipe hint */}
+      <div style={{
+        position: 'absolute',
+        bottom: '60px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        fontSize: '12px',
+        color: '#787774',
+        opacity: 0.7,
+      }}>
+        ← Swipe to explore →
+      </div>
+    </div>
+  );
+};
+
 const DraggableCollage = ({ name, jobTitle }) => {
   const containerRef = useRef(null);
   const [containerSize, setContainerSize] = useState({ width: REFERENCE_WIDTH, height: REFERENCE_HEIGHT });
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     const updateSize = () => {
+      const width = window.innerWidth;
+      setIsMobile(width < MOBILE_BREAKPOINT);
+
       if (containerRef.current) {
-        const { width, height } = containerRef.current.getBoundingClientRect();
-        setContainerSize({ width, height });
+        const rect = containerRef.current.getBoundingClientRect();
+        setContainerSize({ width: rect.width, height: rect.height });
       }
     };
 
@@ -501,6 +814,12 @@ const DraggableCollage = ({ name, jobTitle }) => {
     return { x, y };
   };
 
+  // Render mobile carousel on small screens
+  if (isMobile) {
+    return <MobileCarousel items={collageItems} name={name} jobTitle={jobTitle} />;
+  }
+
+  // Desktop: render draggable collage
   return (
     <div className="collage-hero">
       <div
