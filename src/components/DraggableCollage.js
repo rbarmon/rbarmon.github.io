@@ -66,17 +66,31 @@ const collageItems = [
     company: 'Little Help Agency',
     role: 'Software Engineer',
     link: 'https://www.littlehelp.co.jp/',
-    // x: 990/1400 = 0.707, y shifted up
-    positionPercent: { x: 0.707, y: 0.17 },
-    rotation: 3,
+    // centered under name
+    positionPercent: { x: 0.5, y: 0.58 },
+    centerX: true,
+    elementWidth: 260,
+    rotation: 0,
     zIndex: 11,
+  },
+  {
+    id: 'lumo-demo',
+    type: 'article-card',
+    image: '/images/collage/littlehelp-meet-lumo.jpg',
+    title: 'Meet Lumo! β版発表会',
+    subtitle: '製品デモ 2025.12.11 Tokyo',
+    link: 'https://lumo.cx/#meet-lumo',
+    // top right
+    positionPercent: { x: 0.68, y: 0.08 },
+    rotation: 3,
+    zIndex: 12,
   },
   {
     id: 'location',
     type: 'location-tag',
     text: 'Tokyo, Japan',
-    // centered horizontally, moved up
-    positionPercent: { x: 0.5, y: 0.6 },
+    // centered under littlehelp badge
+    positionPercent: { x: 0.5, y: 0.70 },
     centerX: true,
     elementWidth: 130,
     rotation: 0,
@@ -814,8 +828,19 @@ const DraggableCollage = ({ name, jobTitle }) => {
     const yOffset = (containerSize.height - effectiveHeight) / 2;
     let y = yOffset + (positionPercent.y * effectiveHeight);
 
+    // On 27" monitors (2400px+), bring elements closer to center
+    if (containerSize.width >= 2400) {
+      const factor = Math.min(1, (containerSize.width - 2400) / 400); // 0 to 1 for 2400-2800px
+      if (positionPercent.y < 0.3) {
+        // Top elements: push down towards center
+        y += 20 + factor * 20; // 20-40px down
+      } else if (positionPercent.y > 0.5) {
+        // Bottom elements: push up towards center
+        y -= 20 + factor * 20; // 20-40px up
+      }
+    }
     // On larger screens (16"+), push top elements down and bottom elements up
-    if (containerSize.width > 1400) {
+    else if (containerSize.width > 1400) {
       const factor = (containerSize.width - 1400) / 400; // 0 to 1 for 1400-1800px
       if (positionPercent.y < 0.3) {
         // Top elements: push down
@@ -843,10 +868,11 @@ const DraggableCollage = ({ name, jobTitle }) => {
   };
 
   // Calculate scale factor based on screen width
-  // 14" laptop (~1400-1512px) = 1.0, 16" laptop (~1728px+) = larger
+  // 14" laptop (~1400-1512px) = 1.0, 16" laptop (~1728px+) = larger, 27" monitor = even larger
   const getScale = () => {
     const width = containerSize.width;
     if (width <= 1400) return 1;
+    if (width >= 2400) return 1.3; // 27" monitors
     if (width >= 1800) return 1.25;
     // Linear interpolation between 1400 and 1800
     return 1 + ((width - 1400) / 400) * 0.25;
