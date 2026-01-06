@@ -825,12 +825,6 @@ function MainPage() {
                 />
               </div>
 
-              {/* Streak Stats */}
-              <img
-                src="https://github-readme-streak-stats.herokuapp.com/?user=rbarmon&theme=default&hide_border=true&background=00000000"
-                alt="GitHub Streak"
-                className="github-streak"
-              />
             </div>
           </div>
         </section>
