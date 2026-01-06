@@ -866,7 +866,7 @@ function MainPage() {
         <div className="container"><div className="divider" /></div>
 
         <section className="section" id="projects">
-          <div className="container" style={{ maxWidth: '640px' }}>
+          <div className="container">
             <h2 className="section-heading">
               <TranslatedText en="Projects" ja="プロジェクト" />
             </h2>
