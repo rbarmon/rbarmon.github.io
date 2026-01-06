@@ -101,7 +101,7 @@ const workExperience = [
   {
     id: 'little-help-se',
     logo: '/images/collage/littlehelp-logo.jpeg',
-    companyUrl: 'https://www.littlehelp.co.jp/',
+    companyUrl: 'https://note.littlehelp.co.jp/n/ne8e8c5b631b4',
     date: { en: 'Apr 2025 – Present', ja: '2025年4月～現在' },
     title: { en: 'Software Engineer / Solution Engineer', ja: 'ソフトウェアエンジニア / ソリューションエンジニア' },
     company: { en: 'Little Help Agency LLC', ja: 'Little Help Agency LLC' },
@@ -133,7 +133,7 @@ const workExperience = [
   {
     id: 'little-help-intern',
     logo: '/images/collage/littlehelp-logo.jpeg',
-    companyUrl: 'https://www.littlehelp.co.jp/',
+    companyUrl: 'https://note.littlehelp.co.jp/n/ne8e8c5b631b4',
     date: { en: 'Mar 2025 – Apr 2025', ja: '2025年3月～2025年4月' },
     title: { en: 'Software Engineer Intern', ja: 'ソフトウェアエンジニアインターン' },
     company: { en: 'Little Help Agency LLC', ja: 'Little Help Agency LLC' },
@@ -227,34 +227,20 @@ const workExperience = [
 // Projects Data
 const projects = [
   {
-    id: 'bonsai',
-    title: { en: 'Bonsai Flashcard App', ja: 'Bonsaiフラッシュカードアプリ' },
-    description: { en: 'Study platform with spaced repetition for university students', ja: '大学生向け間隔反復学習プラットフォーム' },
-    tech: 'Swift, Firebase, SwiftUI',
-    image: '/images/project/web/quizzoio.png',
+    id: 'ramp',
+    title: { en: 'Ramp', ja: 'Ramp' },
+    description: { en: 'AI-powered developer onboarding with voice-guided code exploration', ja: 'AIを使った音声ガイド付きコード探索で開発者オンボーディング' },
+    tech: 'TypeScript, OpenAI API, CLI',
+    link: 'https://rampup.dev/',
+    image: '/images/project/web/ramp.png',
   },
   {
-    id: 'techextend',
-    title: { en: 'TechExtend AI', ja: 'TechExtend AI' },
-    description: { en: 'AI-powered learning content creation platform', ja: 'AI学習コンテンツ作成プラットフォーム' },
-    tech: 'React, OpenAI API, Firebase',
-    link: 'https://techextend.ai/',
-    image: '/images/project/web/techextendai.png',
-  },
-  {
-    id: 'quizzo',
-    title: { en: 'Quizzo.io', ja: 'Quizzo.io' },
-    description: { en: 'Interactive flashcard platform with collaboration', ja: 'コラボレーション機能付きフラッシュカードプラットフォーム' },
-    tech: 'React, Firebase, OpenAI API',
-    link: 'https://quizzo.io/',
-    image: '/images/project/web/quizzoio.png',
-  },
-  {
-    id: 'afl',
-    title: { en: 'AFL Game Ranking System', ja: 'AFLゲームランキング' },
-    description: { en: 'Automated AFL match ranking and analysis', ja: 'AFL試合の自動ランキング分析' },
-    tech: 'React, Node.js, PostgreSQL',
-    image: '/images/project/web/aflgrs.png',
+    id: 'oboeru',
+    title: { en: 'Oboeru', ja: 'Oboeru' },
+    description: { en: 'Collaborative learning with spaced repetition and AI-enhanced flashcards', ja: 'AI強化フラッシュカードと間隔反復によるコラボ学習' },
+    tech: 'React, Electron, OpenAI API',
+    link: 'https://oboeru.ai/',
+    image: '/images/project/web/oboeru.png',
   },
 ];
 
@@ -800,7 +786,7 @@ function MainPage() {
           </div>
         </section>
 
-        {/* Projects - commented out for now
+        {/* Projects */}
         <div className="container"><div className="divider" /></div>
 
         <section className="section" id="projects">
@@ -817,7 +803,6 @@ function MainPage() {
         </section>
 
         <div className="container"><div className="divider" /></div>
-        */}
 
         {/* Contact */}
         <section className="section" id="contact">
@@ -855,7 +840,7 @@ function MainPage() {
               <ul className="footer-links">
                 <li><a href="#about"><TranslatedText en="About" ja="紹介" /></a></li>
                 <li><a href="#work"><TranslatedText en="Work" ja="職歴" /></a></li>
-                {/* <li><a href="#projects"><TranslatedText en="Projects" ja="プロジェクト" /></a></li> */}
+                <li><a href="#projects"><TranslatedText en="Projects" ja="プロジェクト" /></a></li>
               </ul>
             </div>
             <div className="footer-section">
