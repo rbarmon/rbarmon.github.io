@@ -91,7 +91,7 @@ const collageItems: CollageItemType[] = [
     image: '/images/collage/littlehelp-meet-lumo-demo.jpg',
     title: 'Meet Lumo! β版発表会',
     subtitle: '製品デモ 2025.12.11 Tokyo',
-    link: 'https://lumo.cx/#meet-lumo',
+    link: 'https://note.littlehelp.co.jp/n/ne8e8c5b631b4',
     positionPercent: { x: 0.68, y: 0.08 },
     rotation: 3,
     zIndex: 12,

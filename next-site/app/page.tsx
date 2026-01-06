@@ -9,7 +9,7 @@ const workExperience = [
   {
     id: 'little-help-se',
     logo: '/images/collage/littlehelp-logo.jpeg',
-    companyUrl: 'https://note.littlehelp.co.jp/n/ne8e8c5b631b4',
+    companyUrl: 'https://www.littlehelp.co.jp/',
     date: { en: 'Apr 2025 – Present', ja: '2025年4月～現在' },
     title: { en: 'Software Engineer / Solution Engineer', ja: 'ソフトウェアエンジニア / ソリューションエンジニア' },
     company: { en: 'Little Help Agency LLC', ja: 'Little Help Agency LLC' },
@@ -41,7 +41,7 @@ const workExperience = [
   {
     id: 'little-help-intern',
     logo: '/images/collage/littlehelp-logo.jpeg',
-    companyUrl: 'https://note.littlehelp.co.jp/n/ne8e8c5b631b4',
+    companyUrl: 'https://www.littlehelp.co.jp/',
     date: { en: 'Mar 2025 – Apr 2025', ja: '2025年3月～2025年4月' },
     title: { en: 'Software Engineer Intern', ja: 'ソフトウェアエンジニアインターン' },
     company: { en: 'Little Help Agency LLC', ja: 'Little Help Agency LLC' },
