@@ -763,7 +763,7 @@ function MainPage() {
         <div className="container"><div className="divider" /></div>
 
         {/* Tech Stack */}
-        <section className="section" id="tech">
+        <section className="section" id="tech" style={{ paddingBottom: 'var(--space-md)' }}>
           <div className="container">
             <h2 className="section-heading">
               <TranslatedText en="Tech Stack" ja="技術スタック" />
@@ -782,7 +782,7 @@ function MainPage() {
         <div className="container"><div className="divider" /></div>
 
         {/* GitHub Stats */}
-        <section className="section">
+        <section className="section" style={{ paddingBottom: 'var(--space-md)' }}>
           <div className="container">
             <h2 className="section-heading">
               <TranslatedText en="GitHub Activity" ja="GitHubアクティビティ" />
@@ -832,7 +832,7 @@ function MainPage() {
         <div className="container"><div className="divider" /></div>
 
         {/* Hackathons */}
-        <section className="section">
+        <section className="section" style={{ paddingBottom: 'var(--space-md)' }}>
           <div className="container">
             <h2 className="section-heading">
               <TranslatedText en="Hackathons" ja="ハッカソン" />
@@ -859,7 +859,7 @@ function MainPage() {
         {/* Projects */}
         <div className="container"><div className="divider" /></div>
 
-        <section className="section" id="projects">
+        <section className="section" id="projects" style={{ paddingBottom: 'var(--space-md)' }}>
           <div className="container">
             <h2 className="section-heading">
               <TranslatedText en="Projects" ja="プロジェクト" />
@@ -875,7 +875,7 @@ function MainPage() {
         <div className="container"><div className="divider" /></div>
 
         {/* Contact */}
-        <section className="section" id="contact">
+        <section className="section" id="contact" style={{ paddingBottom: 'var(--space-md)' }}>
           <div className="container">
             <h2 className="section-heading">
               <TranslatedText en="Get in Touch" ja="連絡先" />
