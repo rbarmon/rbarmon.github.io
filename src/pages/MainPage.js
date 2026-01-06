@@ -229,18 +229,22 @@ const projects = [
   {
     id: 'ramp',
     title: { en: 'Ramp', ja: 'Ramp' },
-    description: { en: 'AI-powered developer onboarding with voice-guided code exploration', ja: 'AIを使った音声ガイド付きコード探索で開発者オンボーディング' },
+    tagline: { en: 'Onboard to any codebase in hours, not weeks', ja: '数週間ではなく数時間でどんなコードベースにもオンボード' },
+    description: { en: 'AI-powered developer onboarding with voice-guided code exploration.', ja: 'AIを使った音声ガイド付きコード探索で開発者オンボーディング。' },
     tech: 'TypeScript, OpenAI API, CLI',
     link: 'https://rampup.dev/',
     image: '/images/project/web/ramp.png',
+    status: 'Beta',
   },
   {
     id: 'oboeru',
     title: { en: 'Oboeru', ja: 'Oboeru' },
-    description: { en: 'Collaborative learning with spaced repetition and AI-enhanced flashcards', ja: 'AI強化フラッシュカードと間隔反復によるコラボ学習' },
+    tagline: { en: 'Collaborative learning powered by spaced repetition', ja: '間隔反復によるコラボ学習' },
+    description: { en: 'Study together with shared flashcard decks and AI-enhanced learning.', ja: '共有フラッシュカードデッキとAI強化学習で一緒に勉強。' },
     tech: 'React, Electron, OpenAI API',
     link: 'https://oboeru.ai/',
     image: '/images/project/web/oboeru.png',
+    status: 'Beta',
   },
 ];
 
@@ -516,25 +520,97 @@ const TimelineItem = ({ item }) => {
 
 // Project Card Component
 const ProjectCard = ({ project }) => (
-  <div className="project-card">
-    {project.image && (
-      <img src={project.image} alt={project.title.en} className="project-card-image" />
-    )}
-    <div className="project-card-body">
-      <h5 className="project-card-title">
-        <TranslatedText en={project.title.en} ja={project.title.ja} />
-      </h5>
-      <p className="project-card-desc">
-        <TranslatedText en={project.description.en} ja={project.description.ja} />
-      </p>
-      <p className="project-card-tech">{project.tech}</p>
-      {project.link && (
-        <a href={project.link} target="_blank" rel="noreferrer" className="btn btn-ghost" style={{ marginTop: 'var(--space-sm)', padding: 0 }}>
-          View →
-        </a>
+  <a
+    href={project.link}
+    target="_blank"
+    rel="noreferrer"
+    className="project-card-minimal"
+    style={{
+      display: 'flex',
+      alignItems: 'flex-start',
+      gap: '20px',
+      padding: '24px 0',
+      borderBottom: '1px solid var(--border-color)',
+      textDecoration: 'none',
+      color: 'inherit',
+      transition: 'opacity 0.2s ease',
+    }}
+  >
+    <div
+      style={{
+        width: '48px',
+        height: '48px',
+        borderRadius: '12px',
+        backgroundColor: 'var(--bg-secondary)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        flexShrink: 0,
+        overflow: 'hidden',
+      }}
+    >
+      {project.image && (
+        <img
+          src={project.image}
+          alt={project.title.en}
+          style={{ width: '28px', height: '28px', objectFit: 'contain' }}
+        />
       )}
     </div>
-  </div>
+    <div style={{ flex: 1, minWidth: 0 }}>
+      <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '16px' }}>
+        <div>
+          <h5 style={{
+            fontSize: '18px',
+            fontWeight: 500,
+            color: 'var(--text-primary)',
+            margin: 0,
+            lineHeight: 1.3,
+          }}>
+            <TranslatedText en={project.title.en} ja={project.title.ja} />
+          </h5>
+          <p style={{
+            fontSize: '14px',
+            color: 'var(--text-secondary)',
+            margin: '4px 0 0 0',
+          }}>
+            <TranslatedText en={project.tagline.en} ja={project.tagline.ja} />
+          </p>
+        </div>
+        <div style={{
+          display: 'flex',
+          alignItems: 'center',
+          gap: '12px',
+          flexShrink: 0,
+        }}>
+          {project.status && (
+            <span style={{
+              fontSize: '12px',
+              fontWeight: 500,
+              color: 'var(--text-tertiary)',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+            }}>
+              {project.status}
+            </span>
+          )}
+          <span style={{
+            fontSize: '16px',
+            color: 'var(--text-tertiary)',
+            transition: 'transform 0.2s ease',
+          }}>↗</span>
+        </div>
+      </div>
+      <p style={{
+        fontSize: '14px',
+        color: 'var(--text-secondary)',
+        margin: '12px 0 0 0',
+        lineHeight: 1.6,
+      }}>
+        <TranslatedText en={project.description.en} ja={project.description.ja} />
+      </p>
+    </div>
+  </a>
 );
 
 function MainPage() {
@@ -662,7 +738,7 @@ function MainPage() {
                 <p>
                   <TranslatedText
                     en="I'm a software engineer based in Tokyo, building SaaS products and integrations. Previously studied at Monash University (Australia). I love working on full-stack applications, CRM integrations, and AI-powered tools."
-                    ja="東京を拠点にSaaS製品と連携機能を開発するソフトウェアエンジニアです。オーストラリアのモナシュ大学で学びました。フルスタックアプリケーション、CRM連携、AIツールの開発に情熱を持っています。"
+                    ja="東京を拠点にSaaS製品と連携機能を開発するソフトウェアエンジニアです。オーストラリアのモナッシュ大学で学びました。フルスタックアプリケーション、CRM連携、AIツールの開発に情熱を持っています。"
                   />
                 </p>
               </div>
@@ -790,11 +866,11 @@ function MainPage() {
         <div className="container"><div className="divider" /></div>
 
         <section className="section" id="projects">
-          <div className="container">
+          <div className="container" style={{ maxWidth: '640px' }}>
             <h2 className="section-heading">
               <TranslatedText en="Projects" ja="プロジェクト" />
             </h2>
-            <div className="project-grid">
+            <div>
               {projects.map((project) => (
                 <ProjectCard key={project.id} project={project} />
               ))}
