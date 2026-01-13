@@ -852,9 +852,9 @@ export default function Home() {
           </div>
         </section>
 
+        {/* Projects section hidden
         <div className="container"><div className="divider" /></div>
 
-        {/* Projects */}
         <section className="section" id="projects" style={{ paddingBottom: 'var(--space-md)' }}>
           <div className="container">
             <h2 className="section-heading">
@@ -867,6 +867,7 @@ export default function Home() {
             </div>
           </div>
         </section>
+        */}
 
         <div className="container"><div className="divider" /></div>
 
@@ -903,7 +904,7 @@ export default function Home() {
               <ul className="footer-links">
                 <li><a href="#about"><TranslatedText en="About" ja="紹介" /></a></li>
                 <li><a href="#work"><TranslatedText en="Work" ja="職歴" /></a></li>
-                <li><a href="#projects"><TranslatedText en="Projects" ja="プロジェクト" /></a></li>
+                {/* <li><a href="#projects"><TranslatedText en="Projects" ja="プロジェクト" /></a></li> */}
               </ul>
             </div>
             <div className="footer-section">
