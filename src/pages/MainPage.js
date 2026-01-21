@@ -790,19 +790,19 @@ function MainPage() {
             <div className="github-section">
               {/* GitHub Profile Card */}
               <a
-                href="https://github.com/rbarmon"
+                href="https://github.com/riankawahara"
                 target="_blank"
                 rel="noreferrer"
                 className="github-profile-card"
               >
                 <img
                   src="https://avatars.githubusercontent.com/u/106299081?v=4"
-                  alt="rbarmon"
+                  alt="riankawahara"
                   className="github-avatar"
                 />
                 <div className="github-info">
                   <div className="github-name-row">
-                    <span className="github-username">rbarmon</span>
+                    <span className="github-username">riankawahara</span>
                     <span className="github-realname">Rian</span>
                   </div>
                   <div className="github-stats-row">
@@ -819,7 +819,7 @@ function MainPage() {
               {/* Contribution Graph */}
               <div className="github-chart-container">
                 <img
-                  src="https://ghchart.rshah.org/rbarmon"
+                  src="https://ghchart.rshah.org/riankawahara"
                   alt="GitHub Contribution Graph"
                   className="github-chart"
                 />
@@ -884,7 +884,7 @@ function MainPage() {
               {/* <a href="mailto:rbar0032@student.monash.edu" className="btn btn-primary">
                 Email Me
               </a> */}
-              <a href="https://github.com/rbarmon" target="_blank" rel="noreferrer" className="btn btn-secondary">
+              <a href="https://github.com/riankawahara" target="_blank" rel="noreferrer" className="btn btn-secondary">
                 GitHub
               </a>
               <a href="https://www.linkedin.com/in/rian-barrett-40a090261/" target="_blank" rel="noreferrer" className="btn btn-secondary">
@@ -916,7 +916,7 @@ function MainPage() {
             <div className="footer-section">
               <h5><TranslatedText en="Social" ja="ソーシャル" /></h5>
               <ul className="footer-links">
-                <li><a href="https://github.com/rbarmon" target="_blank" rel="noreferrer">GitHub</a></li>
+                <li><a href="https://github.com/riankawahara" target="_blank" rel="noreferrer">GitHub</a></li>
                 <li><a href="https://www.linkedin.com/in/rian-barrett-40a090261/" target="_blank" rel="noreferrer">LinkedIn</a></li>
               </ul>
             </div>

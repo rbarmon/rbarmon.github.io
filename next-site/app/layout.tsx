@@ -7,16 +7,16 @@ export const metadata: Metadata = {
   description: "Rian Kawahara's portfolio highlighting software engineering, design, and data science projects.",
   openGraph: {
     type: 'website',
-    url: 'https://rbarmon.github.io/',
+    url: 'https://riankawahara.github.io/',
     title: 'Rian Kawahara | Software Engineer',
     description: 'Software engineer building AI-powered tools. Based in Tokyo.',
-    images: [{ url: 'https://rbarmon.github.io/images/og-image.png' }],
+    images: [{ url: 'https://riankawahara.github.io/images/og-image.png' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Rian Kawahara | Software Engineer',
     description: 'Software engineer building AI-powered tools. Based in Tokyo.',
-    images: ['https://rbarmon.github.io/images/og-image.png'],
+    images: ['https://riankawahara.github.io/images/og-image.png'],
   },
 };
 

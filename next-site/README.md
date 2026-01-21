@@ -1,6 +1,6 @@
 # Portfolio Site (Next.js)
 
-Source code for rbarmon.github.io
+Source code for riankawahara.github.io
 
 ## Development
 
